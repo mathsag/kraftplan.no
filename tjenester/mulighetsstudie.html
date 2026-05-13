@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mulighetsstudie — Kraftplan AS</title>
+  <meta name="description" content="Kraftplan utfører mulighetsstudier for småkraftverk. Hydrologisk, teknisk, miljømessig og regulatorisk vurdering som gir deg et solid beslutningsgrunnlag." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green-50: #f4f6f4; --green-100: #e4ebe5; --green-600: #3d5c42;
+      --green-700: #2f4733; --green-900: #192a1d; --green-950: #101c13;
+      --off-white: #f9f8f5; --off-white-2: #f2f0eb;
+      --text: #1a1f1b; --text-muted: rgba(26,31,27,0.6);
+    }
+    html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+    body { font-family: "DM Sans", system-ui, sans-serif; background: var(--off-white); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+    h1, h2, h3 { font-family: "DM Serif Display", serif; font-weight: 400; line-height: 1.1; }
+    ::selection { background: var(--green-900); color: var(--off-white); }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+    @media (min-width: 768px) { .wrap { padding: 0 3rem; } }
+    .label { font-size: 0.7rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.2em; color: var(--green-600); }
+    .label-light { color: rgba(249,248,245,0.5); }
+    .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 1.75rem; border-radius: 4px; font-size: 0.875rem; font-weight: 500; text-decoration: none; transition: all 0.25s; font-family: inherit; cursor: pointer; border: none; }
+    .btn-dark { background: var(--green-900); color: var(--off-white); }
+    .btn-dark:hover { background: var(--green-700); }
+
+    /* HEADER */
+    #header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; transition: all 0.4s; background: transparent; }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; height: 4.5rem; }
+    .logo { font-family: "DM Serif Display", serif; font-size: 1.4rem; text-decoration: none; color: var(--off-white); letter-spacing: 0.01em; transition: color 0.4s; }
+    .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+    .nav-links a { font-size: 0.875rem; font-weight: 400; color: rgba(249,248,245,0.85); text-decoration: none; transition: color 0.3s; }
+    .nav-links a:hover { color: var(--off-white); }
+    .nav-cta { background: rgba(249,248,245,0.15) !important; color: var(--off-white) !important; border: 1px solid rgba(249,248,245,0.3) !important; padding: 0.5rem 1.25rem !important; border-radius: 4px; transition: all 0.25s !important; }
+    .nav-cta:hover { background: rgba(249,248,245,0.25) !important; }
+    .hamburger { display: none; background: none; border: none; cursor: pointer; color: var(--off-white); transition: color 0.4s; }
+    @media (max-width: 767px) { .nav-links { display: none; } .hamburger { display: block; } }
+
+    /* MOBILE MENU */
+    #mobile-menu { position: fixed; inset: 0; z-index: 200; background: var(--green-950); display: flex; flex-direction: column; padding: 0 1.5rem 2rem; opacity: 0; pointer-events: none; transition: opacity 0.35s; }
+    #mobile-menu.open { opacity: 1; pointer-events: auto; }
+    .mobile-top { display: flex; align-items: center; justify-content: space-between; height: 4.5rem; }
+    .mobile-logo { font-family: "DM Serif Display", serif; font-size: 1.4rem; color: var(--off-white); }
+    .mobile-close { background: none; border: none; cursor: pointer; color: var(--off-white); }
+    .mobile-nav { margin-top: 2.5rem; display: flex; flex-direction: column; }
+    .mobile-nav a { font-family: "DM Serif Display", serif; font-size: 2.5rem; color: var(--off-white); text-decoration: none; padding: 0.6rem 0; border-bottom: 1px solid rgba(249,248,245,0.07); }
+    .mobile-footer { margin-top: auto; padding-top: 2rem; border-top: 1px solid rgba(249,248,245,0.1); font-size: 0.875rem; color: rgba(249,248,245,0.5); display: flex; flex-direction: column; gap: 0.3rem; }
+    .mobile-footer a { color: inherit; text-decoration: none; }
+
+    /* HERO */
+    .page-hero { position: relative; height: 100svh; min-height: 640px; overflow: hidden; }
+    .page-hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(16,28,19,0.35) 0%, rgba(16,28,19,0.3) 40%, rgba(16,28,19,0.88) 100%); }
+    .hero-content { position: relative; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 3.5rem; padding-top: 9rem; }
+    .hero-back { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; color: rgba(249,248,245,0.5); text-decoration: none; margin-bottom: 2rem; transition: color 0.2s; }
+    .hero-back:hover { color: var(--off-white); }
+    .hero-label { font-size: 0.7rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.2em; color: rgba(249,248,245,0.45); }
+    .hero-h1 { font-size: clamp(2.5rem, 5vw, 4rem); color: var(--off-white); margin-top: 1rem; max-width: 18ch; }
+    .hero-ingress { font-size: 1.0625rem; color: rgba(249,248,245,0.7); margin-top: 1.5rem; max-width: 42rem; line-height: 1.75; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 2rem; margin-top: 2.5rem; padding-top: 2.5rem; border-top: 1px solid rgba(249,248,245,0.15); }
+    .hero-meta-item { display: flex; flex-direction: column; gap: 0.25rem; }
+    .hero-meta-label { font-size: 0.65rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.18em; color: rgba(249,248,245,0.35); }
+    .hero-meta-val { font-size: 0.875rem; color: rgba(249,248,245,0.75); }
+
+    /* SECTIONS */
+    .section { padding: 5rem 0; }
+    @media (min-width: 768px) { .section { padding: 7rem 0; } }
+    .section-alt { background: var(--off-white-2); }
+    .grid-2 { display: grid; gap: 3rem; }
+    @media (min-width: 768px) { .grid-2 { grid-template-columns: 3fr 5fr; gap: 5rem; align-items: start; } }
+    .body-lg { font-size: 1.0625rem; line-height: 1.75; color: var(--text-muted); }
+    .body-lg + .body-lg { margin-top: 1rem; }
+
+    /* INNHOLD-KORT */
+    .innhold-grid { display: grid; gap: 1.5rem; margin-top: 0; }
+    @media (min-width: 640px) { .innhold-grid { grid-template-columns: repeat(2, 1fr); } }
+    .innhold-kort { background: white; border-radius: 6px; border: 1px solid rgba(26,31,27,0.08); padding: 1.5rem; }
+    .innhold-kort-nr { font-size: 0.65rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.18em; color: var(--green-600); }
+    .innhold-kort-tittel { font-family: "DM Serif Display", serif; font-size: 1.2rem; margin-top: 0.5rem; }
+    .innhold-kort-tekst { font-size: 0.9rem; color: var(--text-muted); margin-top: 0.5rem; line-height: 1.65; }
+
+    /* FORDELER */
+    .fordel-item { display: flex; align-items: baseline; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid rgba(26,31,27,0.08); }
+    .fordel-item:first-child { border-top: 1px solid rgba(26,31,27,0.08); }
+    .fordel-check { color: var(--green-600); font-size: 0.9rem; flex-shrink: 0; }
+    .fordel-tekst { font-size: 1rem; }
+
+    /* CTA */
+    .cta-strip { background: var(--off-white-2); padding: 4rem 0; }
+    .cta-strip-inner { display: grid; gap: 2rem; align-items: center; }
+    @media (min-width: 768px) { .cta-strip-inner { grid-template-columns: 1fr auto; } }
+    .cta-strip h2 { font-family: "DM Serif Display", serif; font-size: clamp(1.5rem, 3vw, 2.25rem); color: var(--text); }
+    .cta-strip p { font-size: 0.9375rem; color: var(--text-muted); margin-top: 0.5rem; }
+
+    /* STICKY */
+    .tjeneste-sticky { position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%); z-index: 90; background: rgba(25,42,29,0.92); backdrop-filter: blur(12px); border-radius: 999px; display: inline-flex; align-items: center; padding: 0; box-shadow: 0 4px 24px rgba(0,0,0,0.18); overflow: hidden; white-space: nowrap; transition: opacity 0.3s; }
+    .tjeneste-sticky.hidden { opacity: 0; pointer-events: none; }
+    .sticky-item { display: flex; align-items: center; gap: 0.6rem; padding: 0.7rem 1.4rem; text-decoration: none; color: rgba(249,248,245,0.9); font-size: 0.8rem; font-weight: 500; transition: background 0.2s; border-radius: 999px; }
+    .sticky-item:hover { background: rgba(255,255,255,0.1); color: #fff; }
+    .sticky-divider { width: 1px; height: 1.25rem; background: rgba(249,248,245,0.2); flex-shrink: 0; }
+
+    /* FOOTER */
+    footer { background: var(--green-950); color: var(--off-white); }
+    .footer-top { display: grid; gap: 3rem; padding: 4rem 0 3rem; }
+    @media (min-width: 768px) { .footer-top { grid-template-columns: 4fr 7fr; } }
+    .footer-tagline { font-family: "DM Serif Display", serif; font-size: clamp(1.5rem, 2.5vw, 2rem); line-height: 1.25; }
+    .footer-cols { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+    @media (min-width: 640px) { .footer-cols { grid-template-columns: repeat(3, 1fr); } }
+    .footer-col-heading { font-size: 0.65rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.2em; color: rgba(249,248,245,0.35); }
+    .footer-col ul { list-style: none; margin-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
+    .footer-col a { font-size: 0.875rem; color: rgba(249,248,245,0.6); text-decoration: none; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--off-white); }
+    .footer-bottom { border-top: 1px solid rgba(249,248,245,0.07); padding: 1.25rem 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(249,248,245,0.25); }
+
+
+    /* DROPDOWN */
+    .nav-dropdown { position: relative; }
+    .nav-dropdown > a { display: flex; align-items: center; gap: 0.3rem; }
+    .nav-dropdown > a::after { content: ''; width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 4px solid currentColor; opacity: 0.6; transition: transform 0.3s; }
+    .nav-dropdown:hover > a::after { transform: rotate(180deg); }
+    .dropdown-menu {
+      position: absolute; top: 100%; left: 50%; transform: translateX(-50%); padding-top: 0.75rem;
+      background: rgba(249,248,245,0.45); backdrop-filter: blur(20px); border-radius: 6px; box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      border: 1px solid rgba(26,31,27,0.08);
+      min-width: 220px; padding: 0.5rem;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.2s, transform 0.2s;
+      transform: translateX(-50%) translateY(4px);
+    }
+    .nav-dropdown:hover .dropdown-menu {
+      opacity: 1; pointer-events: auto;
+      transform: translateX(-50%) translateY(0px);
+    }
+    .dropdown-menu a {
+      display: block; padding: 0.5rem 0.75rem;
+      font-size: 0.875rem; color: rgba(26,31,27,0.75) !important;
+      text-decoration: none; border-radius: 4px;
+      transition: background 0.15s, color 0.15s;
+      white-space: nowrap;
+    }
+    .dropdown-menu a:hover { background: var(--green-50); color: var(--green-900) !important; }
+    .dropdown-divider { height: 1px; background: rgba(26,31,27,0.08); margin: 0.25rem 0; }
+
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="header">
+  <div class="wrap header-inner">
+    <a href="../index.html" class="logo"><img src="../bilder/logo.png" alt="Kraftplan" style="height:44px;width:auto;display:block;transition:opacity 0.4s;" id="logo-img" /></a>
+    <nav>
+      <ul class="nav-links">
+                <li class="nav-dropdown">
+          <a href="../tjenester.html">Tjenester</a>
+          <div class="dropdown-menu">
+            <a href="../tjenester/konsesjonssoknad.html">Konsesjonssøknad</a>
+            <a href="../tjenester/planendringssoknad.html">Planendringssøknad</a>
+            <a href="../tjenester/mulighetsstudie.html">Mulighetsstudie</a>
+            <a href="../tjenester/konsekvensutredning.html">Konsekvensutredning</a>
+            <a href="../tjenester/bistand.html">Bistand i høring</a>
+            <a href="../tjenester/kommunale-forhold.html">Kommunale forhold</a>
+            <a href="../tjenester/drone.html">Droneoppdrag</a>
+          </div>
+        </li>
+        <li><a href="../prosjekter.html">Vårt arbeid</a></li>
+        <li><a href="../om-oss.html">Om oss</a></li>
+        <li><a href="mailto:kasper.sagen@kraftplan.no" class="nav-cta">Kontakt</a></li>
+      </ul>
+    </nav>
+    <button class="hamburger" onclick="openMenu()" aria-label="Åpne meny">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M4 7h16M4 17h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<!-- MOBILE MENU -->
+<div id="mobile-menu">
+  <div class="mobile-top">
+    <img src="../bilder/logo.png" alt="Kraftplan" style="height:40px;width:auto;display:block;" />
+    <button class="mobile-close" onclick="closeMenu()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+  <nav class="mobile-nav">
+    <a href="../tjenester.html" onclick="closeMenu()">Tjenester</a>
+    <a href="../prosjekter.html" onclick="closeMenu()">Vårt arbeid</a>
+    <a href="../om-oss.html" onclick="closeMenu()">Om oss</a>
+    <a href="../kontakt.html" onclick="closeMenu()">Kontakt</a>
+  </nav>
+  <div class="mobile-footer">
+    <a href="tel:+4748193444">+47 481 93 444</a>
+    <a href="mailto:kasper.sagen@kraftplan.no">kasper.sagen@kraftplan.no</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="page-hero">
+  <img src="https://images.unsplash.com/photo-1567068695552-e00769c08da5?auto=format&fit=crop&w=1920&q=85" alt="" />
+  <div class="hero-overlay"></div>
+  <div class="wrap hero-content">
+    <a href="../tjenester.html" class="hero-back">← Alle tjenester</a>
+    <p class="hero-label">Tjeneste 03</p>
+    <h1 class="hero-h1">Mulighetsstudie for småkraftverk</h1>
+    <p class="hero-ingress">Vurderer du å utvikle et småkraftverk? En mulighetsstudie gir deg et solid beslutningsgrunnlag og er første steg på veien mot et gjennomførbart prosjekt.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Passer for</span>
+        <span class="hero-meta-val">Tidlig fase / fallrettigheter</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Resultat</span>
+        <span class="hero-meta-val">Beslutningsgrunnlag</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BESKRIVELSE -->
+<section class="section">
+  <div class="wrap grid-2">
+    <div class="reveal">
+      <p class="label">Om tjenesten</p>
+      <h2 style="font-size:clamp(1.5rem,3vw,2.25rem);margin-top:1rem">Tidlig avklaring av prosjektets realisme.</h2>
+    </div>
+    <div class="reveal" style="transition-delay:0.1s">
+      <p class="body-lg">Har du fallrettigheter til et vassdrag og ønsker en tidlig vurdering av mulighetene? En forstudie reduserer risiko før videre investeringer og gir et godt grunnlag for dialog med grunneiere, investorer og myndigheter.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HVA INNGÅR -->
+<section class="section section-alt">
+  <div class="wrap">
+    <div class="grid-2">
+      <div class="reveal">
+        <p class="label">Hva inngår</p>
+        <h2 style="font-size:clamp(1.5rem,3vw,2.25rem);margin-top:1rem">Fire fagområder i én vurdering.</h2>
+      </div>
+      <div class="reveal" style="transition-delay:0.1s">
+        <div class="innhold-grid">
+          <div class="innhold-kort">
+            <p class="innhold-kort-nr">01</p>
+            <p class="innhold-kort-tittel">Hydrologisk og økonomisk vurdering</p>
+            <p class="innhold-kort-tekst">Analyse av vannføring basert på tilgjengelige data og referansestasjoner, kombinert med beregning av forventet årsproduksjon og vurdering av lønnsomhet.</p>
+          </div>
+          <div class="innhold-kort">
+            <p class="innhold-kort-nr">02</p>
+            <p class="innhold-kort-tittel">Teknisk mulighetsstudie</p>
+            <p class="innhold-kort-tekst">Vurdering av egnet plassering for inntak, rørtrasé og kraftstasjon.</p>
+          </div>
+          <div class="innhold-kort">
+            <p class="innhold-kort-nr">03</p>
+            <p class="innhold-kort-tittel">Miljø- og arealforhold</p>
+            <p class="innhold-kort-tekst">Kartlegging av naturverdier, arealbruk og andre hensyn i området.</p>
+          </div>
+          <div class="innhold-kort">
+            <p class="innhold-kort-nr">04</p>
+            <p class="innhold-kort-tittel">Regulatoriske forhold</p>
+            <p class="innhold-kort-tekst">Avklaring av konsesjonsplikt og relevante krav fra myndighetene.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORDELER -->
+<section class="section">
+  <div class="wrap grid-2">
+    <div class="reveal">
+      <p class="label">Fordeler</p>
+      <h2 style="font-size:clamp(1.5rem,3vw,2.25rem);margin-top:1rem">Hvorfor starte med en mulighetsstudie?</h2>
+    </div>
+    <div class="reveal" style="transition-delay:0.1s">
+      <div class="fordel-item"><span class="fordel-check">✓</span><span class="fordel-tekst">Tidlig avklaring av prosjektets realisme</span></div>
+      <div class="fordel-item"><span class="fordel-check">✓</span><span class="fordel-tekst">Redusert risiko før videre investeringer</span></div>
+      <div class="fordel-item"><span class="fordel-check">✓</span><span class="fordel-tekst">Et godt beslutningsgrunnlag for dialog med grunneiere, investorer og myndigheter</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-strip">
+  <div class="wrap cta-strip-inner">
+    <div>
+      <h2>Har du fallrettigheter du vil vurdere?</h2>
+      <p>Ta kontakt for en uforpliktende prat om mulighetene.</p>
+    </div>
+    <a href="../kontakt.html" class="btn btn-dark" style="white-space:nowrap;">Ta kontakt</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap footer-top">
+    <div>
+      <img src="../bilder/logo.png" alt="Kraftplan" style="height:64px;width:auto;display:block;filter:brightness(0) invert(1);opacity:0.85;margin-bottom:1rem;" />
+      <p style="font-size:0.875rem;color:rgba(249,248,245,0.45);margin-top:1.5rem">Spesialister på småkraftutvikling</p>
+      <a href="../kontakt.html" style="display:inline-flex;align-items:center;gap:0.4rem;margin-top:1.5rem;font-size:0.875rem;font-weight:500;color:rgba(249,248,245,0.7);text-decoration:none;">Ta kontakt →</a>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <p class="footer-col-heading">Tjenester</p>
+        <ul>
+          <li><a href="konsesjonssoknad.html">Konsesjonssøknad</a></li>
+          <li><a href="planendringssoknad.html">Planendringssøknad</a></li>
+          <li><a href="mulighetsstudie.html">Mulighetsstudie</a></li>
+          <li><a href="konsekvensutredning.html">Konsekvensutredning</a></li>
+          <li><a href="bistand.html">Bistand i høring</a></li>
+          <li><a href="kommunale-forhold.html">Kommunale forhold</a></li>
+          <li><a href="drone.html">Droneoppdrag</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-heading">Selskapet</p>
+        <ul>
+          <li><a href="../om-oss.html">Om oss</a></li>
+          <li><a href="../prosjekter.html">Vårt arbeid</a></li>
+          <li><a href="../kontakt.html">Kontakt</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-heading">Kontakt</p>
+        <ul>
+          <li><a href="tel:+4748193444">+47 481 93 444</a></li>
+          <li><a href="mailto:kasper.sagen@kraftplan.no">kasper.sagen@kraftplan.no</a></li>
+          <li><a href="https://w2.brreg.no/enhet/sok/detalj.jsp?orgnr=933873870" target="_blank" rel="noopener">Org.nr 933 873 870</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>© 2025 Kraftplan AS</span>
+    <span>Effektiv planlegging, bærekraftig kraft</span>
+  </div>
+</footer>
+
+<div id="tjeneste-sticky" class="tjeneste-sticky hidden">
+  <a href="planendringssoknad.html" class="sticky-item">← Planendringssøknad</a>
+  <div class="sticky-divider"></div>
+  <a href="konsekvensutredning.html" class="sticky-item">Konsekvensutredning →</a>
+</div>
+
+<script>
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > window.innerHeight * 0.6) {
+      header.style.background = 'rgba(249,248,245,0.95)';
+      header.style.backdropFilter = 'blur(12px)';
+      header.style.borderBottom = '1px solid rgba(26,31,27,0.08)';
+      header.querySelectorAll('nav a:not(.nav-cta)').forEach(a => a.style.color = 'rgba(26,31,27,0.7)');
+      header.querySelector('.logo').style.color = 'var(--green-900)';
+
+      header.querySelector('.hamburger').style.color = 'var(--green-900)';
+    } else {
+      header.style.background = 'transparent';
+      header.style.backdropFilter = '';
+      header.style.borderBottom = 'none';
+      header.querySelectorAll('nav a:not(.nav-cta)').forEach(a => a.style.color = 'rgba(249,248,245,0.85)');
+      header.querySelector('.logo').style.color = 'var(--off-white)';
+
+      header.querySelector('.hamburger').style.color = 'var(--off-white)';
+    }
+  }, { passive: true });
+  header.querySelectorAll('nav a:not(.nav-cta)').forEach(a => a.style.color = 'rgba(249,248,245,0.85)');
+  header.querySelector('.logo').style.color = 'var(--off-white)';
+
+  header.querySelector('.hamburger').style.color = 'var(--off-white)';
+
+  function openMenu() { document.getElementById('mobile-menu').classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeMenu() { document.getElementById('mobile-menu').classList.remove('open'); document.body.style.overflow = ''; }
+
+  const sticky = document.getElementById('tjeneste-sticky');
+  const footer = document.querySelector('footer');
+  function sjekkSticky() {
+    const footerTop = footer.getBoundingClientRect().top;
+    const pastHero = window.scrollY > window.innerHeight * 0.5;
+    sticky.classList.toggle('hidden', !pastHero || footerTop < window.innerHeight - 20);
+  }
+  window.addEventListener('scroll', sjekkSticky, { passive: true });
+  sjekkSticky();
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
