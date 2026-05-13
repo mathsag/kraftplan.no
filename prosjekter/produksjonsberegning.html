@@ -47,8 +47,11 @@
     .mobile-nav a { font-family: "DM Serif Display", serif; font-size: 2.5rem; color: var(--off-white); text-decoration: none; padding: 0.6rem 0; border-bottom: 1px solid rgba(249,248,245,0.07); }
 
     .mobile-nav-gruppe { border-bottom: 1px solid rgba(249,248,245,0.07); }
-    .mobile-nav-label { font-family: "DM Serif Display", serif; font-size: 2.5rem; color: rgba(249,248,245,0.4); display: block; padding: 0.6rem 0; cursor: default; }
-    .mobile-nav-sub { display: flex; flex-direction: column; padding-bottom: 0.5rem; }
+    .mobile-nav-label { font-family: "DM Serif Display", serif; font-size: 2.5rem; color: var(--off-white); display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 0; cursor: pointer; }
+    .mobile-nav-label::after { content: "+"; font-family: "DM Sans", sans-serif; font-size: 1.5rem; opacity: 0.5; transition: transform 0.3s; }
+    .mobile-nav-gruppe.open .mobile-nav-label::after { transform: rotate(45deg); }
+    .mobile-nav-sub { display: none; flex-direction: column; padding-bottom: 0.75rem; }
+    .mobile-nav-gruppe.open .mobile-nav-sub { display: flex; }
     .mobile-nav-sub a { font-family: "DM Sans", sans-serif; font-size: 1.1rem; color: rgba(249,248,245,0.75); text-decoration: none; padding: 0.4rem 0 0.4rem 1rem; border-bottom: none; transition: color 0.2s; }
     .mobile-nav-sub a:hover { color: var(--off-white); }
     .mobile-footer { margin-top: auto; padding-top: 2rem; border-top: 1px solid rgba(249,248,245,0.1); font-size: 0.875rem; color: rgba(249,248,245,0.5); display: flex; flex-direction: column; gap: 0.3rem; }
@@ -358,6 +361,11 @@
 
 <script>
   function openMenu() { document.getElementById('mobile-menu').classList.add('open'); document.body.style.overflow = 'hidden'; }
+  document.querySelectorAll('.mobile-nav-label').forEach(label => {
+    label.addEventListener('click', () => {
+      label.parentElement.classList.toggle('open');
+    });
+  });
   function closeMenu() { document.getElementById('mobile-menu').classList.remove('open'); document.body.style.overflow = ''; }
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
