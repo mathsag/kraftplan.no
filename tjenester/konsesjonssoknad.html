@@ -137,6 +137,7 @@
     .nve-kort-pil { position: absolute; bottom: 1rem; right: 1rem; opacity: 0; font-size: 0.8rem; }
     .nve-kort.aktiv .nve-kort-pil { opacity: 1; color: var(--green-600); }
     .nve-panel { margin-top: 1.5rem; background: white; border-radius: 8px; padding: 2rem; display: none; color: var(--text); }
+    @media (max-width: 767px) { .nve-panel, .nve-panel.aktiv { display: none !important; } }
     .nve-panel.aktiv { display: block; }
     .nve-panel-grid { display: grid; gap: 1.5rem; }
     @media (min-width: 768px) { .nve-panel-grid { grid-template-columns: 1fr 1fr; gap: 2rem; } }
