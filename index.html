@@ -418,8 +418,12 @@
     }
     .footer-mobile { display: none; }
     @media (max-width: 767px) {
+      footer { overflow: hidden; width: 100%; }
       .footer-top { display: none !important; }
-      .footer-mobile { display: block; padding: 4rem 0 2rem; }
+      .footer-mobile { display: block; padding: 3rem 1.5rem 2.5rem; width: 100%; box-sizing: border-box; }
+      .footer-mobile img { display: block; }
+      .footer-mobile div { width: 100%; }
+      .footer-bottom { padding: 1.25rem 1.5rem; color: rgba(249,248,245,0.5); }
       .footer-desktop-tagline { display: none; }
     }
   

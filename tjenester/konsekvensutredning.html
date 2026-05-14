@@ -113,8 +113,12 @@
     .footer-col a:hover { color: var(--off-white); }
     .footer-mobile { display: none; }
     @media (max-width: 767px) {
+      footer { overflow: hidden; width: 100%; }
       .footer-top { display: none !important; }
-      .footer-mobile { display: block; padding: 4rem 0 2rem; }
+      .footer-mobile { display: block; padding: 3rem 1.5rem 2.5rem; width: 100%; box-sizing: border-box; }
+      .footer-mobile img { display: block; }
+      .footer-mobile div { width: 100%; }
+      .footer-bottom { padding: 1.25rem 1.5rem; color: rgba(249,248,245,0.5); }
       .footer-desktop-tagline { display: none; }
     }
     .footer-bottom { border-top: 1px solid rgba(249,248,245,0.07); padding: 1.25rem 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(249,248,245,0.25); }
