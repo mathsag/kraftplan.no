@@ -416,6 +416,12 @@
       font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
       color: rgba(249,248,245,0.25);
     }
+    .footer-mobile { display: none; }
+    @media (max-width: 767px) {
+      .footer-top { display: none !important; }
+      .footer-mobile { display: block; padding: 3rem 0 2rem; }
+      .footer-desktop-tagline { display: none; }
+    }
   
     /* NVE-PROSESS */
     .nve-grid { display: grid; gap: 0.75rem; margin-top: 2.5rem; }
