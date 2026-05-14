@@ -33,10 +33,11 @@
     .nav-dropdown > a { display: flex; align-items: center; gap: 0.3rem; cursor: pointer; }
     .nav-dropdown > a::after { content: ""; width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 4px solid currentColor; opacity: 0.6; transition: transform 0.3s; }
     .nav-dropdown:hover > a::after { transform: rotate(180deg); }
-    .dropdown-menu { position: absolute; top: calc(100% + 0.5rem); left: 50%; transform: translateX(-50%); background: rgba(249,248,245,0.97); backdrop-filter: blur(20px); border-radius: 8px; box-shadow: 0 8px 32px rgba(0,0,0,0.12); border: 1px solid rgba(26,31,27,0.08); min-width: 220px; padding: 0.5rem; opacity: 0; pointer-events: none; transition: opacity 0.2s, transform 0.2s; transform: translateX(-50%) translateY(6px); }
-    .nav-dropdown:hover .dropdown-menu { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
-    .dropdown-menu a { display: flex; align-items: center; gap: 0.75rem; padding: 0.6rem 0.75rem; font-size: 0.875rem; color: rgba(26,31,27,0.75) !important; text-decoration: none; border-radius: 6px; transition: background 0.15s; white-space: nowrap; }
-    .dropdown-menu a:hover { background: var(--off-white-2); color: var(--green-900) !important; }
+    .dropdown-menu { position: absolute; top: 100%; left: 50%; padding-top: 0.75rem; background: transparent; min-width: 220px; opacity: 0; pointer-events: none; transition: opacity 0.2s; transform: translateX(-50%); }
+    .dropdown-menu-inner { background: rgba(15,25,17,0.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-radius: 8px; border: 1px solid rgba(249,248,245,0.12); padding: 0.5rem; }
+    .nav-dropdown:hover .dropdown-menu { opacity: 1; pointer-events: auto; }
+    .dropdown-menu a { display: flex; align-items: center; gap: 0.75rem; padding: 0.6rem 0.75rem; font-size: 0.875rem; color: rgba(249,248,245,0.85) !important; text-decoration: none; border-radius: 6px; transition: background 0.15s; white-space: nowrap; }
+    .dropdown-menu a:hover { background: rgba(249,248,245,0.1); color: var(--off-white) !important; }
     .dropdown-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
     .dropdown-dot-kraft { background: var(--green-600); }
     .dropdown-dot-areal { background: var(--blue); }
@@ -114,7 +115,7 @@
     .nyhet-dot.aktiv { width: 20px; border-radius: 3px; background: var(--green-700); }
 
     /* FOOTER */
-    footer { background: var(--green-950); color: var(--off-white); }
+    footer { background: #0e0e0e; color: var(--off-white); }
     .footer-top { display: grid; gap: 3rem; padding: 4rem 0 3rem; }
     @media (min-width: 768px) { .footer-top { grid-template-columns: 4fr 7fr; } }
     .footer-cols { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
@@ -146,8 +147,10 @@
         <li class="nav-dropdown">
           <a href="#">Fagområder</a>
           <div class="dropdown-menu">
-            <a href="kraft/index.html"><span class="dropdown-dot dropdown-dot-kraft"></span>Småkraftutvikling</a>
-            <a href="arealplan/index.html"><span class="dropdown-dot dropdown-dot-areal"></span>Arealplanlegging</a>
+            <div class="dropdown-menu-inner">
+              <a href="kraft/index.html"><span class="dropdown-dot dropdown-dot-kraft"></span>Småkraftutvikling</a>
+              <a href="arealplan/index.html"><span class="dropdown-dot dropdown-dot-areal"></span>Arealplanlegging</a>
+            </div>
           </div>
         </li>
         <li><a href="om-oss.html">Om oss</a></li>
