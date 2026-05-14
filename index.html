@@ -132,7 +132,13 @@
       footer .wrap { padding: 0 1.5rem; }
       .footer-top { padding: 5rem 0 3rem; gap: 3rem; }
       .footer-cols { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-      .footer-bottom { padding: 2rem 0; }
+      .footer-mobile { display: none; }
+    @media (max-width: 767px) {
+      .footer-top { display: none !important; }
+      .footer-mobile { display: block; padding: 3rem 0 2rem; }
+      .footer-desktop-tagline { display: none; }
+    }
+    .footer-bottom { padding: 2rem 0; }
     }
     .reveal {
       opacity: 0;
