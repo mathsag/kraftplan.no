@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kraftplan AS — Spesialister på småkraftutvikling</title>
+  <meta name="description" content="Kraftplan AS tilbyr spesialiserte tjenester for småkraftprosjekter. Vi hjelper deg med konsesjonssøknader og planlegging i tråd med NVEs krav." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green-50:  #f4f6f4;
+      --green-100: #e4ebe5;
+      --green-600: #3d5c42;
+      --green-700: #2f4733;
+      --green-800: #243828;
+      --green-900: #192a1d;
+      --green-950: #101c13;
+      --blue:      #4a7c8e;
+      --blue-light: #7aaebb;
+      --off-white: #f9f8f5;
+      --off-white-2: #f2f0eb;
+      --text:      #1a1f1b;
+      --text-muted: rgba(26,31,27,0.6);
+    }
+
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: var(--off-white);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    ::selection { background: var(--green-900); color: var(--off-white); }
+
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    @media (min-width: 768px) { .wrap { padding: 0 3rem; } }
+
+    /* TYPE */
+    h1, h2, h3 { font-family: 'DM Serif Display', Georgia, serif; font-weight: 400; line-height: 1.1; }
+    em { font-style: italic; }
+
+    .display-xl { font-size: clamp(2.75rem, 7vw, 5.5rem); letter-spacing: -0.01em; }
+    .display-lg { font-size: clamp(2rem, 4.5vw, 3.75rem); letter-spacing: -0.01em; }
+    .display-md { font-size: clamp(1.625rem, 3vw, 2.5rem); }
+
+    /* LABEL */
+    .label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--green-600);
+    }
+    .label-light { color: rgba(249,248,245,0.6); }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.75rem;
+      border-radius: 4px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.25s;
+      letter-spacing: 0.01em;
+    }
+    .btn-dark  { background: var(--green-900); color: var(--off-white); }
+    .btn-dark:hover  { background: var(--green-700); }
+    .btn-outline { border: 1px solid rgba(249,248,245,0.4); color: var(--off-white); }
+    .btn-outline:hover { border-color: var(--off-white); background: rgba(249,248,245,0.1); }
+
+    /* LINK */
+    .link {
+      color: var(--green-700);
+      font-weight: 500;
+      font-size: 0.9rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: gap 0.3s;
+    }
+    .link:hover { gap: 0.7rem; }
+    .link-light { color: rgba(249,248,245,0.8); }
+    .link-light:hover { color: var(--off-white); }
+
+    /* REVEAL */
+
+    /* DROPDOWN */
+    .nav-dropdown { position: relative; }
+    .nav-dropdown > a { display: flex; align-items: center; gap: 0.3rem; }
+    .nav-dropdown > a::after { content: ''; width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 4px solid currentColor; opacity: 0.6; transition: transform 0.3s; }
+    .nav-dropdown:hover > a::after { transform: rotate(180deg); }
+    .dropdown-menu {
+      position: absolute; top: 100%; left: 50%; transform: translateX(-50%); padding-top: 0.75rem;
+      background: rgba(249,248,245,0.45); backdrop-filter: blur(20px); border-radius: 6px; box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      border: 1px solid rgba(26,31,27,0.08);
+      min-width: 220px; padding: 0.5rem;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.2s, transform 0.2s;
+      transform: translateX(-50%) translateY(4px);
+    }
+    .nav-dropdown:hover .dropdown-menu {
+      opacity: 1; pointer-events: auto;
+      transform: translateX(-50%) translateY(0px);
+    }
+    .dropdown-menu a {
+      display: block; padding: 0.5rem 0.75rem;
+      font-size: 0.875rem; color: rgba(26,31,27,0.75) !important;
+      text-decoration: none; border-radius: 4px;
+      transition: background 0.15s, color 0.15s;
+      white-space: nowrap;
+    }
+    .dropdown-menu a:hover { background: var(--green-50); color: var(--green-900) !important; }
+    .dropdown-divider { height: 1px; background: rgba(26,31,27,0.08); margin: 0.25rem 0; }
+
+
+    @media (max-width: 640px) {
+      footer .wrap { padding: 0 1.5rem; }
+
+      .footer-cols { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+      .footer-bottom { padding: 2rem 0; }
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ====== HEADER ====== */
+    #header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      transition: all 0.4s;
+    }
+    #header.scrolled {
+      background: rgba(249,248,245,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(26,31,27,0.08);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 4.5rem;
+    }
+    .logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.4rem;
+      text-decoration: none;
+      color: var(--off-white);
+      transition: color 0.4s;
+      letter-spacing: 0.01em;
+    }
+    #header.scrolled .logo { color: var(--green-900); }
+
+    .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 400;
+      color: rgba(249,248,245,0.85);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--off-white); }
+    #header.scrolled .nav-links a { color: rgba(26,31,27,0.7); }
+    #header.scrolled .nav-links a:hover { color: var(--green-900); }
+
+    .nav-cta {
+      background: rgba(249,248,245,0.15) !important;
+      color: var(--off-white) !important;
+      border: 1px solid rgba(249,248,245,0.3) !important;
+      padding: 0.5rem 1.25rem !important;
+      border-radius: 4px;
+      transition: all 0.25s !important;
+    }
+    .nav-cta:hover { background: rgba(249,248,245,0.25) !important; }
+    #header.scrolled .nav-cta {
+      background: var(--green-900) !important;
+      color: var(--off-white) !important;
+      border-color: var(--green-900) !important;
+    }
+    #header.scrolled .nav-cta:hover { background: var(--green-700) !important; border-color: var(--green-700) !important; }
+
+    .hamburger {
+      display: none; background: none; border: none;
+      cursor: pointer; color: var(--off-white); transition: color 0.4s;
+    }
+    #header.scrolled .hamburger { color: var(--green-900); }
+    @media (max-width: 767px) { .nav-links { display: none; } .hamburger { display: block; } }
+
+    /* Mobile menu */
+    #mobile-menu {
+      position: fixed; inset: 0; z-index: 200;
+      background: var(--green-950);
+      display: flex; flex-direction: column;
+      padding: 0 1.5rem 2rem;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.35s;
+    }
+    #mobile-menu.open { opacity: 1; pointer-events: auto; }
+    .mobile-top {
+      display: flex; align-items: center;
+      justify-content: space-between; height: 4.5rem;
+    }
+    .mobile-logo { font-family: 'DM Serif Display', serif; font-size: 1.4rem; color: var(--off-white); }
+    .mobile-close { background: none; border: none; cursor: pointer; color: var(--off-white); }
+    .mobile-nav { margin-top: 2.5rem; display: flex; flex-direction: column; }
+    .mobile-nav a {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.5rem;
+      color: var(--off-white);
+      text-decoration: none;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(249,248,245,0.07);
+      transition: color 0.2s;
+    }
+    .mobile-nav a:hover { color: var(--blue-light); }
+
+    .mobile-nav-gruppe { border-bottom: 1px solid rgba(249,248,245,0.07); }
+    .mobile-nav-label { font-family: "DM Serif Display", serif; font-size: 2.5rem; color: var(--off-white); display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 0; cursor: pointer; }
+    .mobile-nav-label::after { content: "+"; font-family: "DM Sans", sans-serif; font-size: 1.5rem; opacity: 0.5; transition: transform 0.3s; }
+    .mobile-nav-gruppe.open .mobile-nav-label::after { transform: rotate(45deg); }
+    .mobile-nav-sub { display: none; flex-direction: column; padding-bottom: 0.75rem; }
+    .mobile-nav-gruppe.open .mobile-nav-sub { display: flex; }
+    .mobile-nav-sub a { font-family: "DM Sans", sans-serif; font-size: 1.1rem; color: rgba(249,248,245,0.75); text-decoration: none; padding: 0.4rem 0 0.4rem 1rem; border-bottom: none; transition: color 0.2s; }
+    .mobile-nav-sub a:hover { color: var(--off-white); }
+    .mobile-footer {
+      margin-top: auto; padding-top: 2rem;
+      border-top: 1px solid rgba(249,248,245,0.1);
+      font-size: 0.875rem; color: rgba(249,248,245,0.5);
+      display: flex; flex-direction: column; gap: 0.3rem;
+    }
+    .mobile-footer a { color: inherit; text-decoration: none; }
+
+    /* ====== HERO ====== */
+    #hero {
+      position: relative;
+      height: 100svh; min-height: 600px;
+      overflow: hidden;
+    }
+    #hero video {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        160deg,
+        rgba(16,28,19,0.72) 0%,
+        rgba(16,28,19,0.45) 50%,
+        rgba(16,28,19,0.82) 100%
+      );
+    }
+    .hero-content {
+      position: relative; height: 100%;
+      display: flex; flex-direction: column;
+      justify-content: flex-end;
+      padding-bottom: 5rem; padding-top: 7rem;
+    }
+    .hero-content h1 {
+      color: var(--off-white);
+      margin-top: 1.25rem;
+      max-width: 15ch;
+    }
+    .hero-content h1 em { color: var(--blue-light); font-style: italic; }
+    .hero-btns {
+      display: flex; flex-wrap: wrap;
+      align-items: center; gap: 1rem;
+      margin-top: 2.25rem;
+    }
+    .scroll-hint {
+      position: absolute; bottom: 2rem; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column;
+      align-items: center; gap: 0.5rem;
+      color: rgba(249,248,245,0.4);
+      font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.2em;
+    }
+    .scroll-hint span { width: 1px; height: 2rem; background: currentColor; }
+    @media (max-width: 767px) { .scroll-hint { display: none; } }
+
+    /* ====== SECTIONS ====== */
+    .section { padding: 5rem 0; }
+    @media (min-width: 768px) { .section { padding: 7rem 0; } }
+
+    .section-alt { background: var(--off-white-2); }
+    .section-dark {
+      background: var(--green-900);
+      color: var(--off-white);
+    }
+
+    /* 2-col grid */
+    .grid-2 { display: grid; gap: 3rem; }
+    @media (min-width: 768px) {
+      .grid-2 { grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+      .grid-2.wide { grid-template-columns: 5fr 7fr; }
+    }
+
+    .body-lg { font-size: 1.0625rem; line-height: 1.75; color: var(--text-muted); }
+    .body-lg + .body-lg { margin-top: 1rem; }
+
+    /* Divider */
+    .divider { height: 1px; background: rgba(26,31,27,0.1); }
+    .divider-light { height: 1px; background: rgba(249,248,245,0.1); }
+
+    /* ====== TJENESTE LISTE ====== */
+    .tjeneste-list { margin-top: 2rem; }
+    .tjeneste-item {
+      display: grid;
+      grid-template-columns: 2rem 1fr auto;
+      align-items: baseline;
+      gap: 1rem;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid rgba(26,31,27,0.08);
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.2s;
+    }
+    .tjeneste-item:first-child { border-top: 1px solid rgba(26,31,27,0.08); }
+    .tjeneste-item:hover { background: rgba(26,31,27,0.02); padding-left: 0.5rem; }
+    .tjeneste-nr { font-size: 0.7rem; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+    .tjeneste-info {}
+    .tjeneste-tittel { font-size: 1.0625rem; font-weight: 500; }
+    .tjeneste-ingress { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.15rem; }
+    .tjeneste-arrow { color: var(--text-muted); font-size: 0.9rem; transition: transform 0.25s, color 0.25s; }
+    .tjeneste-item:hover .tjeneste-arrow { transform: translateX(4px); color: var(--text); }
+
+    /* ====== PRINSIPPER ====== */
+    .prinsipper {
+      display: grid; gap: 2rem;
+      margin-top: 3rem; padding-top: 3rem;
+    }
+    @media (min-width: 768px) { .prinsipper { grid-template-columns: repeat(3, 1fr); } }
+    .prinsipp-nr {
+      font-size: 0.65rem; font-weight: 500;
+      text-transform: uppercase; letter-spacing: 0.2em;
+      color: rgba(249,248,245,0.35);
+    }
+    .prinsipp-tittel {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.25rem;
+      color: var(--off-white);
+      margin-top: 0.75rem;
+    }
+    .prinsipp-tekst {
+      font-size: 0.9rem; line-height: 1.65;
+      color: rgba(249,248,245,0.6);
+      margin-top: 0.5rem;
+    }
+
+    /* ====== CTA BAND ====== */
+    .cta-band { padding: 4rem 0; }
+    @media (min-width: 768px) { .cta-band { padding: 6rem 0; } }
+    .cta-inner {
+      display: grid; gap: 2rem;
+      border-top: 1px solid rgba(26,31,27,0.1);
+      border-bottom: 1px solid rgba(26,31,27,0.1);
+      padding: 4rem 0;
+    }
+    @media (min-width: 768px) { .cta-inner { grid-template-columns: 6fr 5fr; gap: 4rem; align-items: center; } }
+    .cta-body { font-size: 1rem; line-height: 1.7; color: var(--text-muted); }
+
+    /* ====== FOOTER ====== */
+    footer {
+      background: var(--green-950);
+      color: var(--off-white);
+    }
+    .footer-top {
+      display: grid; gap: 3rem;
+      padding: 4.5rem 0 3.5rem;
+    }
+    @media (min-width: 768px) { .footer-top { grid-template-columns: 4fr 7fr; gap: 5rem; } }
+    .footer-tagline {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      line-height: 1.25;
+      color: var(--off-white);
+    }
+    .footer-cols {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+    @media (min-width: 640px) { .footer-cols { grid-template-columns: repeat(3, 1fr); } }
+    .footer-col-heading {
+      font-size: 0.65rem; font-weight: 500;
+      text-transform: uppercase; letter-spacing: 0.2em;
+      color: rgba(249,248,245,0.35);
+    }
+    .footer-col ul { list-style: none; margin-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
+    .footer-col a { font-size: 0.875rem; color: rgba(249,248,245,0.6); text-decoration: none; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--off-white); }
+    .footer-bottom {
+      border-top: 1px solid rgba(249,248,245,0.07);
+      padding: 1.25rem 0;
+      display: flex; flex-wrap: wrap;
+      align-items: center; justify-content: space-between;
+      gap: 0.5rem;
+      font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: rgba(249,248,245,0.25);
+    }
+    .footer-mobile { display: none; }
+    @media (max-width: 767px) {
+      footer { overflow-x: hidden; width: 100%; max-width: 100vw; }
+      .footer-top { display: none !important; }
+      .footer-mobile { display: block; padding: 3rem 1.5rem 2.5rem; width: 100%; max-width: 100%; box-sizing: border-box; }
+      .footer-mobile img { display: block; max-width: 100%; }
+      .footer-mobile div { width: 100%; max-width: 100%; box-sizing: border-box; }
+      .footer-bottom { padding: 1.25rem 1.5rem; color: rgba(249,248,245,0.6); max-width: 100%; box-sizing: border-box; }
+      .footer-desktop-tagline { display: none; }
+      .tjeneste-sticky { max-width: calc(100vw - 3rem); }
+    }
+  
+    /* NVE-PROSESS */
+    .nve-grid { display: grid; gap: 0.75rem; margin-top: 2.5rem; }
+    @media (min-width: 640px) { .nve-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .nve-grid { grid-template-columns: repeat(4, 1fr); } }
+    .nve-kort { background: rgba(249,248,245,0.06); border: 1px solid rgba(249,248,245,0.1); border-radius: 6px; padding: 1.25rem; cursor: pointer; transition: all 0.25s; position: relative; }
+    .nve-kort:hover { background: rgba(249,248,245,0.1); border-color: rgba(249,248,245,0.2); }
+    .nve-kort.aktiv { background: white; border-color: white; color: var(--text); }
+    .nve-kort-nr { font-size: 0.65rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.2em; opacity: 0.4; }
+    .nve-kort.aktiv .nve-kort-nr { color: var(--green-600); opacity: 1; }
+    .nve-kort-tittel { font-family: "DM Serif Display", serif; font-size: 1.1rem; margin-top: 0.5rem; color: var(--off-white); }
+    .nve-kort.aktiv .nve-kort-tittel { color: var(--text); }
+    .nve-kort-pil { position: absolute; bottom: 1rem; right: 1rem; opacity: 0; transition: opacity 0.2s; font-size: 0.8rem; }
+    .nve-kort.aktiv .nve-kort-pil { opacity: 1; color: var(--green-600); }
+    .nve-panel { margin-top: 1.5rem; background: white; border-radius: 8px; padding: 2rem; display: none; color: var(--text); }
+    .nve-panel.aktiv { display: block; }
+    .nve-panel-grid { display: grid; gap: 1.5rem; }
+    @media (min-width: 768px) { .nve-panel-grid { grid-template-columns: 1fr 1fr; gap: 2rem; } }
+    .nve-panel-tittel { font-family: "DM Serif Display", serif; font-size: 1.5rem; }
+    .nve-panel-tekst { font-size: 0.9375rem; color: var(--text-muted); margin-top: 0.75rem; line-height: 1.7; }
+    .nve-panel-meta { margin-top: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; }
+    .nve-meta-rad { display: flex; gap: 0.75rem; font-size: 0.85rem; }
+    .nve-meta-label { font-weight: 500; color: var(--green-700); min-width: 5rem; }
+    .nve-meta-val { color: var(--text-muted); }
+    .nve-kraftplan-boks { background: var(--green-50); border-radius: 6px; padding: 1.25rem; border-left: 3px solid var(--green-600); }
+    .nve-kraftplan-label { font-size: 0.7rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.2em; color: var(--green-600); }
+    .nve-kraftplan-tekst { font-size: 0.9rem; color: var(--text-muted); margin-top: 0.5rem; line-height: 1.65; }
+
+    /* MATCHER */
+    .matcher-wrap { max-width: 680px; margin: 2.5rem auto 0; background: white; border-radius: 8px; border: 1px solid rgba(26,31,27,0.08); overflow: hidden; }
+    .matcher-steg { display: none; padding: 2rem; }
+    .matcher-steg.aktiv { display: block; }
+    .matcher-progress { height: 3px; background: var(--green-100); }
+    .matcher-progress-bar { height: 100%; background: var(--green-700); transition: width 0.4s ease; }
+    .matcher-steg-label { font-size: 0.7rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.2em; color: var(--green-600); }
+    .matcher-sporsmal { font-family: "DM Serif Display", serif; font-size: 1.375rem; margin-top: 0.5rem; }
+    .matcher-valg { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.5rem; }
+    .matcher-knapp { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.25rem; border: 1px solid rgba(26,31,27,0.1); border-radius: 6px; background: none; cursor: pointer; font-family: inherit; font-size: 0.9375rem; color: var(--text); text-align: left; transition: all 0.2s; }
+    .matcher-knapp:hover { border-color: var(--green-600); background: var(--green-50); }
+    .matcher-knapp-ikon { font-size: 1.25rem; }
+    .matcher-knapp-tittel { font-weight: 500; }
+    .matcher-knapp-sub { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.1rem; }
+    .matcher-resultat { display: none; padding: 2rem; }
+    .matcher-resultat.aktiv { display: block; }
+    .resultat-anbefaling { background: var(--green-50); border-radius: 6px; padding: 1.5rem; border-left: 3px solid var(--green-700); }
+    .resultat-label { font-size: 0.7rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.2em; color: var(--green-600); }
+    .resultat-tittel { font-family: "DM Serif Display", serif; font-size: 1.375rem; margin-top: 0.5rem; }
+    .resultat-tekst { font-size: 0.9rem; color: var(--text-muted); margin-top: 0.5rem; line-height: 1.65; }
+    .resultat-btns { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
+    .btn-sm { padding: 0.6rem 1.25rem; font-size: 0.85rem; }
+    .btn-ghost { background: none; border: 1px solid rgba(26,31,27,0.15); color: var(--text); }
+    .btn-ghost:hover { border-color: var(--green-700); color: var(--green-700); }
+
+  
+    .tj-kort {
+      background: white;
+      border-radius: 6px;
+      padding: 1.5rem;
+      text-decoration: none;
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      border: 1px solid rgba(26,31,27,0.06);
+      transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+      position: relative;
+    }
+    .tj-kort:hover { border-color: var(--green-600); box-shadow: 0 4px 20px rgba(26,31,27,0.08); transform: translateY(-2px); }
+    .tj-nr { font-size: 0.65rem; font-weight: 500; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+    .tj-tittel { font-family: "DM Serif Display", serif; font-size: 1.25rem; font-weight: 400; margin-top: 0.25rem; }
+    .tj-tekst { font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; flex: 1; }
+    .tj-pil { font-size: 0.875rem; color: var(--green-600); margin-top: 0.5rem; transition: transform 0.25s; }
+    .tj-kort:hover .tj-pil { transform: translateX(4px); }
+
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="header">
+  <div class="wrap header-inner">
+    <a href="index.html" class="logo"><img src="bilder/logo.png" alt="Kraftplan" style="height:44px;width:auto;display:block;transition:opacity 0.4s;" id="logo-img" /></a>
+    <nav>
+      <ul class="nav-links">
+                <li class="nav-dropdown">
+          <a href="#tjenester">Tjenester</a>
+          <div class="dropdown-menu">
+            <a href="tjenester/konsesjonssoknad.html">Konsesjonssøknad</a>
+            <a href="tjenester/planendringssoknad.html">Planendringssøknad</a>
+            <a href="tjenester/mulighetsstudie.html">Mulighetsstudie</a>
+            <a href="tjenester/konsekvensutredning.html">Konsekvensutredning</a>
+            <a href="tjenester/bistand.html">Bistand i høring</a>
+            <a href="tjenester/kommunale-forhold.html">Kommunale forhold</a>
+            <a href="tjenester/drone.html">Droneoppdrag</a>
+          </div>
+        </li>
+        <li><a href="prosjekter.html">Vårt arbeid</a></li>
+        <li><a href="om-oss.html">Om oss</a></li>
+        <li><a href="mailto:kasper.sagen@kraftplan.no" class="nav-cta">Kontakt</a></li>
+      </ul>
+    </nav>
+    <button class="hamburger" onclick="openMenu()" aria-label="Åpne meny">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M4 7h16M4 17h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<!-- MOBILE MENU -->
+<div id="mobile-menu">
+  <div class="mobile-top">
+    <img src="bilder/logo.png" alt="Kraftplan" style="height:40px;width:auto;display:block;" />
+    <button class="mobile-close" onclick="closeMenu()" aria-label="Lukk">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+  <nav class="mobile-nav">
+    <div class="mobile-nav-gruppe">
+      <span class="mobile-nav-label">Tjenester</span>
+      <div class="mobile-nav-sub">
+        <a href="tjenester/konsesjonssoknad.html" onclick="closeMenu()">Konsesjonssøknad</a>
+        <a href="tjenester/planendringssoknad.html" onclick="closeMenu()">Planendringssøknad</a>
+        <a href="tjenester/mulighetsstudie.html" onclick="closeMenu()">Mulighetsstudie</a>
+        <a href="tjenester/konsekvensutredning.html" onclick="closeMenu()">Konsekvensutredning</a>
+        <a href="tjenester/bistand.html" onclick="closeMenu()">Bistand i høring</a>
+        <a href="tjenester/kommunale-forhold.html" onclick="closeMenu()">Kommunale forhold</a>
+        <a href="tjenester/drone.html" onclick="closeMenu()">Droneoppdrag</a>
+      </div>
+    </div>
+    <a href="prosjekter.html" onclick="closeMenu()">Vårt arbeid</a>
+    <a href="om-oss.html" onclick="closeMenu()">Om oss</a>
+    <a href="mailto:kasper.sagen@kraftplan.no" onclick="closeMenu()">Kontakt</a>
+  </nav>
+  <div class="mobile-footer">
+    <a href="tel:+4748193444">+47 481 93 444</a>
+    <a href="mailto:kasper.sagen@kraftplan.no">kasper.sagen@kraftplan.no</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <video autoplay loop muted playsinline poster="hero-poster.jpg">
+    <source src="hero.mp4" type="video/mp4" />
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="wrap hero-content">
+    <div class="reveal">
+      <p class="label label-light">Kraftplan AS</p>
+    </div>
+    <div class="reveal" style="transition-delay:0.12s">
+      <h1 class="display-xl">Spesialister på <em>småkraft&shy;utvikling</em>.</h1>
+    </div>
+    <div class="reveal hero-btns" style="transition-delay:0.24s">
+      
+      <a href="#tjenester" class="btn btn-outline">Se tjenester</a>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <p>Scroll</p><span></span>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section class="section" style="padding:8rem 0;background:white;">
+  <div class="wrap grid-2 wide">
+    <div class="reveal">
+      <p class="label">Om oss</p>
+      <h2 class="display-md" style="margin-top:1rem">Vi hjelper deg med konsesjonssøknader og planlegging.</h2>
+    </div>
+    <div class="reveal" style="transition-delay:0.1s">
+      <p class="body-lg">Kraftplan AS tilbyr spesialiserte tjenester for småkraftprosjekter. Vi hjelper deg med konsesjonssøknader og planlegging i tråd med NVEs krav.</p>
+      <p class="body-lg" style="margin-top:1rem">Selskapet er ledet av Kasper Sagen, med mastergrad i arealplanlegging og erfaring med offentlig saksbehandling, digitale prosjekteringsverktøy og GIS-programmer.</p>
+      <a href="om-oss.html" class="link" style="margin-top:1.75rem;display:inline-flex">Mer om oss →</a>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+<!-- TJENESTER -->
+<section class="section" id="tjenester" style="background:var(--off-white-2);padding:7rem 0;">
+  <div class="wrap">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;margin-bottom:3rem;">
+      <div>
+        <p class="label">Tjenester</p>
+        <h2 class="section-heading" style="margin-top:0.75rem">Et komplett tilbud for småkraftprosjekter.</h2>
+      </div>
+      
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;">
+      <a href="tjenester/konsesjonssoknad.html" class="tj-kort">
+        <span class="tj-nr">01</span>
+        <h3 class="tj-tittel">Konsesjonssøknad</h3>
+        <p class="tj-tekst">Komplette søknader etter NVEs gjeldende veileder.</p>
+        <span class="tj-pil">→</span>
+      </a>
+      <a href="tjenester/planendringssoknad.html" class="tj-kort">
+        <span class="tj-nr">02</span>
+        <h3 class="tj-tittel">Planendringssøknad</h3>
+        <p class="tj-tekst">Søknader om endring av eksisterende konsesjoner.</p>
+        <span class="tj-pil">→</span>
+      </a>
+      <a href="tjenester/mulighetsstudie.html" class="tj-kort">
+        <span class="tj-nr">03</span>
+        <h3 class="tj-tittel">Mulighetsstudie</h3>
+        <p class="tj-tekst">Tidlig vurdering av om prosjektet er gjennomførbart.</p>
+        <span class="tj-pil">→</span>
+      </a>
+      <a href="tjenester/konsekvensutredning.html" class="tj-kort">
+        <span class="tj-nr">04</span>
+        <h3 class="tj-tittel">Konsekvensutredning</h3>
+        <p class="tj-tekst">Miljømessige og samfunnsmessige konsekvenser.</p>
+        <span class="tj-pil">→</span>
+      </a>
+      <a href="tjenester/bistand.html" class="tj-kort">
+        <span class="tj-nr">05</span>
+        <h3 class="tj-tittel">Bistand i høringsprosess</h3>
+        <p class="tj-tekst">Håndtering av høringsuttalelser og myndighetsdialog.</p>
+        <span class="tj-pil">→</span>
+      </a>
+      <a href="tjenester/kommunale-forhold.html" class="tj-kort">
+        <span class="tj-nr">06</span>
+        <h3 class="tj-tittel">Kommunale forhold</h3>
+        <p class="tj-tekst">Tinglysning, grunneierrettigheter og plansamordning.</p>
+        <span class="tj-pil">→</span>
+      </a>
+      <a href="tjenester/drone.html" class="tj-kort">
+        <span class="tj-nr">07</span>
+        <h3 class="tj-tittel">Droneoppdrag</h3>
+        <p class="tj-tekst">Flyfoto, video og dokumentasjon.</p>
+        <span class="tj-pil">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- TJENESTER -->
+
+
+
+
+<!-- CTA -->
+<section class="cta-band" style="background:white;padding:4rem 0;">
+  <div class="wrap">
+    <div class="cta-inner reveal">
+      <div>
+        <h2 class="display-lg" style="color:var(--text)">Har du behov for hjelp med
+  <span id="tjeneste-rotator" style="display:block;font-family:'DM Serif Display',serif;font-style:italic;font-size:1em;color:var(--blue-light);min-height:1.2em;transition:opacity 0.4s ease;letter-spacing:-0.01em;">konsesjonssøknad?</span>
+</h2>
+      </div>
+      <div>
+        <p class="cta-body" style="color:var(--text-muted)">Kontakt oss for en uforpliktende prat om ditt småkraftprosjekt.</p>
+        <a href="mailto:kasper.sagen@kraftplan.no" class="btn btn-dark" style="margin-top:1.5rem;">Ta kontakt</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="height:1px;background:rgba(26,31,27,0.12);"></div>
+
+
+
+
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap footer-top">
+    <div>
+      <img src="bilder/logo.png" alt="Kraftplan" style="height:64px;width:auto;display:block;filter:brightness(0) invert(1);opacity:0.85;margin-bottom:1rem;margin-top:0.5rem;" />
+      <p style="font-size:0.875rem;color:rgba(249,248,245,0.45);margin-top:0.75rem;line-height:1.6">Spesialister på småkraftutvikling</p>
+      <a href="mailto:kasper.sagen@kraftplan.no" class="link link-light" style="margin-top:1.5rem;display:inline-flex">Ta kontakt →</a>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <p class="footer-col-heading">Tjenester</p>
+        <ul>
+          <li><a href="tjenester/konsesjonssoknad.html">Konsesjonssøknad</a></li>
+          <li><a href="tjenester/planendringssoknad.html">Planendringssøknad</a></li>
+          <li><a href="tjenester/mulighetsstudie.html">Mulighetsstudie</a></li>
+          <li><a href="tjenester/konsekvensutredning.html">Konsekvensutredning</a></li>
+          <li><a href="tjenester/bistand.html">Bistand i høring</a></li>
+          <li><a href="tjenester/kommunale-forhold.html">Kommunale forhold</a></li>
+          <li><a href="tjenester/drone.html">Droneoppdrag</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-heading">Selskapet</p>
+        <ul>
+          <li><a href="om-oss.html">Om oss</a></li>
+          <li><a href="prosjekter.html">Vårt arbeid</a></li>
+          <li><a href="mailto:kasper.sagen@kraftplan.no">Kontakt</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-heading">Kontakt</p>
+        <ul>
+          <li><a href="tel:+4748193444">+47 481 93 444</a></li>
+          <li><a href="mailto:kasper.sagen@kraftplan.no">kasper.sagen@kraftplan.no</a></li>
+          <li><span style="color:rgba(249,248,245,0.6);">Org.nr 933 873 870</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobil-footer -->
+  <!-- Mobil-footer -->
+  <div class="wrap footer-mobile">
+    <img src="bilder/logo.png" alt="Kraftplan" style="height:48px;width:auto;display:block;filter:brightness(0) invert(1);opacity:0.85;" />
+    <div style="margin-top:1.5rem;display:flex;flex-direction:column;gap:0.5rem;">
+      <a href="tel:+4748193444" style="font-size:0.875rem;color:rgba(249,248,245,0.7);text-decoration:none;">+47 481 93 444</a>
+      <a href="mailto:kasper.sagen@kraftplan.no" style="font-size:0.875rem;color:rgba(249,248,245,0.7);text-decoration:none;">kasper.sagen@kraftplan.no</a>
+      <span style="font-size:0.875rem;color:rgba(249,248,245,0.4);">Org.nr 933 873 870</span>
+    </div>
+  </div>
+
+  <div class="wrap footer-bottom">
+    <span>© 2026 Kraftplan AS</span>
+    <span class="footer-desktop-tagline">Effektiv planlegging, bærekraftig kraft</span>
+  </div>
+</footer>
+
+<script>
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > window.innerHeight * 0.6) {
+      header.style.background = 'rgba(249,248,245,0.95)';
+      header.style.backdropFilter = 'blur(12px)';
+      header.style.borderBottom = '1px solid rgba(26,31,27,0.08)';
+      header.querySelectorAll('nav a:not(.nav-cta)').forEach(a => a.style.color = 'rgba(26,31,27,0.7)');
+      header.querySelector('.logo').style.color = 'var(--green-900)';
+
+      header.querySelector('.hamburger').style.color = 'var(--green-900)';
+    } else {
+      header.style.background = 'transparent';
+      header.style.backdropFilter = '';
+      header.style.borderBottom = 'none';
+      header.querySelectorAll('nav a:not(.nav-cta)').forEach(a => a.style.color = 'rgba(249,248,245,0.85)');
+      header.querySelector('.logo').style.color = 'var(--off-white)';
+
+      header.querySelector('.hamburger').style.color = 'var(--off-white)';
+    }
+  }, { passive: true });
+  header.querySelectorAll('nav a:not(.nav-cta)').forEach(a => a.style.color = 'rgba(249,248,245,0.85)');
+  header.querySelector('.logo').style.color = 'var(--off-white)';
+
+  header.querySelector('.hamburger').style.color = 'var(--off-white)';
+
+  function openMenu() {
+    document.getElementById('mobile-menu').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    document.getElementById('mobile-menu').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.querySelectorAll('.mobile-nav-label').forEach(label => {
+    label.addEventListener('click', () => { label.parentElement.classList.toggle('open'); });
+  });
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  function velgNVE(idx) {
+    document.querySelectorAll('.nve-kort').forEach((el,i) => el.classList.toggle('aktiv', i===idx));
+    document.querySelectorAll('.nve-panel').forEach((el,i) => el.classList.toggle('aktiv', i===idx));
+  }
+
+  const svar = {};
+  const resultater = {
+    nytt_tidlig_alt: { tittel: 'Mulighetsstudie + Konsesjonssøknad', tekst: 'Start med en mulighetsstudie for å vurdere om prosjektet er realiserbart, og deretter et samlet løp mot konsesjon.' },
+    nytt_tidlig_spesifikk: { tittel: 'Mulighetsstudie', tekst: 'Første steg er å avklare om prosjektet er gjennomførbart. En mulighetsstudie gir deg grunnlaget du trenger.' },
+    nytt_tidlig_rad: { tittel: 'Mulighetsstudie', tekst: 'Start med en uforpliktende prat. Vi gir deg raskt en vurdering av prosjektets potensial.' },
+    nytt_klar_alt: { tittel: 'Konsesjonssøknad', tekst: 'Vi utarbeider en komplett søknad etter NVEs gjeldende veileder — fra teknisk beskrivelse til innsending.' },
+    nytt_klar_spesifikk: { tittel: 'Konsesjonssøknad / Konsekvensutredning', tekst: 'Vi kan bistå med spesifikke deler av søknadsprosessen.' },
+    nytt_klar_rad: { tittel: 'Konsesjonssøknad', tekst: 'Ta kontakt for en gjennomgang av hva søknaden din trenger.' },
+    nytt_prosess_alt: { tittel: 'Bistand i høringsprosess', tekst: 'Vi håndterer høringsuttalelser og holder dialogen med NVE.' },
+    nytt_prosess_spesifikk: { tittel: 'Bistand i høringsprosess', tekst: 'Vi bistår med tilsvar til høringsuttalelser og koordinering med myndigheter.' },
+    nytt_prosess_rad: { tittel: 'Bistand i høringsprosess', tekst: 'Vi hjelper deg navigere høringsfasen.' },
+    eksisterende_tidlig_alt: { tittel: 'Planendringssøknad', tekst: 'Vi vurderer omfanget av endringen og utarbeider nødvendig dokumentasjon.' },
+    eksisterende_klar_alt: { tittel: 'Planendringssøknad', tekst: 'Vi setter sammen søknaden om planendring og sender inn til NVE.' },
+    eksisterende_prosess_alt: { tittel: 'Bistand i høringsprosess', tekst: 'Vi bistår gjennom høringen og håndterer uttalelsene som kommer inn.' },
+    usikker_tidlig_rad: { tittel: 'Uforpliktende prat', tekst: 'Det beste første steget er en uforpliktende prat. Vi hjelper deg finne ut hva du trenger.' },
+  };
+
+  function velgSvar(steg, val) {
+    svar[steg] = val;
+    if (steg < 3) {
+      document.getElementById('steg-' + steg).classList.remove('aktiv');
+      document.getElementById('steg-' + (steg+1)).classList.add('aktiv');
+      document.getElementById('progress-bar').style.width = ((steg+1)/3*100) + '%';
+    } else {
+      document.getElementById('steg-3').classList.remove('aktiv');
+      document.getElementById('progress-bar').style.width = '100%';
+      const key = svar[1]+'_'+svar[2]+'_'+svar[3];
+      const r = resultater[key] || { tittel: 'Ta kontakt', tekst: 'Vi hjelper deg finne riktig vei videre.' };
+      document.getElementById('resultat-tittel').textContent = r.tittel;
+      document.getElementById('resultat-tekst').textContent = r.tekst;
+      document.getElementById('resultat').classList.add('aktiv');
+    }
+  }
+
+  function nullstillMatcher() {
+    Object.keys(svar).forEach(k => delete svar[k]);
+    document.getElementById('resultat').classList.remove('aktiv');
+    document.querySelectorAll('.matcher-steg').forEach(el => el.classList.remove('aktiv'));
+    document.getElementById('steg-1').classList.add('aktiv');
+    document.getElementById('progress-bar').style.width = '33%';
+  }
+
+
+  const tjenester = [
+    'konsesjonssøknad?',
+    'planendringssøknad?',
+    'mulighetsstudie?',
+    'konsekvensutredning?',
+    'bistand i høring?',
+    'droneoppdrag?',
+  ];
+  let tIdx = 0;
+  const rotator = document.getElementById('tjeneste-rotator');
+  if (rotator) {
+    setInterval(() => {
+      rotator.style.opacity = '0';
+      setTimeout(() => {
+        tIdx = (tIdx + 1) % tjenester.length;
+        rotator.textContent = tjenester[tIdx];
+        rotator.style.opacity = '1';
+      }, 400);
+    }, 2500);
+  }
+
+</script>
+</body>
+</html>

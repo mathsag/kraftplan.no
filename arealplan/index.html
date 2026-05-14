@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arealplanlegging — Kraftplan AS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #4a7c8e;
+      --blue-light: #7aaebb;
+      --blue-dark: #2d5566;
+      --green-900: #192a1d;
+      --green-950: #101c13;
+      --off-white: #f9f8f5;
+      --text: #1a1f1b;
+      --text-muted: rgba(26,31,27,0.6);
+    }
+    html { -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--off-white); color: var(--text); line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 2rem; }
+    h1 { font-family: 'DM Serif Display', serif; font-weight: 400; }
+
+    .container { max-width: 520px; text-align: center; }
+    .ikon { width: 4rem; height: 4rem; color: var(--blue); margin: 0 auto 2rem; }
+    .label { font-size: 0.7rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.2em; color: var(--blue); margin-bottom: 1rem; }
+    h1 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 1rem; }
+    p { font-size: 1rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 2rem; }
+    .tilbake { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 1.75rem; border-radius: 4px; font-size: 0.875rem; font-weight: 500; text-decoration: none; background: var(--green-950); color: var(--off-white); transition: background 0.2s; }
+    .tilbake:hover { background: var(--green-900); }
+    .stripe { width: 3rem; height: 3px; background: var(--blue); margin: 0 auto 2rem; border-radius: 2px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <svg class="ikon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <p class="label">Kraftplan AS</p>
+    <div class="stripe"></div>
+    <h1>Arealplanlegging</h1>
+    <p>Denne delen av nettsiden er under utvikling. Her vil du snart finne informasjon om våre tjenester innen reguleringsplaner, ROS og naturfare, konsekvensutredning og GIS-analyse.</p>
+    <a href="../index.html" class="tilbake">← Tilbake til forsiden</a>
+  </div>
+</body>
+</html>
