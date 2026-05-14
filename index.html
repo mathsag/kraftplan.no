@@ -96,10 +96,10 @@
     .nyhet-nav-btn:hover { background: var(--green-900); color: white; border-color: var(--green-900); }
     .nyhet-nav-btn:disabled { opacity: 0.3; cursor: default; }
     .nyhet-slider-wrap { overflow: hidden; }
-    .nyhet-slider { display: flex; gap: 1.25rem; transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
-    .nyhet-kort { min-width: calc(33.333% - 0.85rem); background: white; border-radius: 12px; overflow: hidden; color: var(--text); display: flex; flex-direction: column; border: 1px solid rgba(26,31,27,0.07); transition: box-shadow 0.25s; flex-shrink: 0; }
-    @media (max-width: 1023px) { .nyhet-kort { min-width: calc(50% - 0.625rem); } }
-    @media (max-width: 639px) { .nyhet-kort { min-width: 85%; } }
+    .nyhet-slider { display: flex; gap: 1.25rem; transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); will-change: transform; }
+    .nyhet-kort { min-width: calc((100% - 2.5rem) / 3); background: white; border-radius: 12px; overflow: hidden; color: var(--text); display: flex; flex-direction: column; border: 1px solid rgba(26,31,27,0.07); transition: box-shadow 0.25s; flex-shrink: 0; }
+    @media (max-width: 1023px) { .nyhet-kort { min-width: calc((100% - 1.25rem) / 2); } }
+    @media (max-width: 639px) { .nyhet-kort { min-width: calc(100% - 2rem); } }
     .nyhet-kort:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
     .nyhet-bilde { aspect-ratio: 16/9; overflow: hidden; position: relative; }
     .nyhet-bilde img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
@@ -184,7 +184,7 @@
 
 <section class="hero">
   <video autoplay loop muted playsinline>
-    <source src="kraft/hero.mp4" type="video/mp4" />
+    <source src="forside.mp4" type="video/mp4" />
   </video>
   <div class="hero-overlay"></div>
   <div class="hero-content">
@@ -266,29 +266,7 @@
           </div>
         </div>
 
-        <div class="nyhet-kort">
-          <div class="nyhet-bilde">
-            <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=800&q=80" alt="Terreng" />
-            <span class="nyhet-tag-badge nyhet-tag-areal">Arealplan</span>
-          </div>
-          <div class="nyhet-innhold">
-            <p class="nyhet-tittel">Terrenganalyse og ROS-vurdering i Innlandet</p>
-            <p class="nyhet-tekst">Naturfare og risikokartlegging som grunnlag for reguleringsplan i skredutsatt område.</p>
-            <p class="nyhet-dato">Februar 2026</p>
-          </div>
-        </div>
 
-        <div class="nyhet-kort">
-          <div class="nyhet-bilde">
-            <img src="https://images.unsplash.com/photo-1682952986992-de7082fb213d?auto=format&fit=crop&w=800&q=80" alt="Drone" />
-            <span class="nyhet-tag-badge">Kraft</span>
-          </div>
-          <div class="nyhet-innhold">
-            <p class="nyhet-tittel">Dronekartlegging av utbyggingsområde i Hordaland</p>
-            <p class="nyhet-tekst">Fotogrammetri og 3D-modellering av terrenget som grunnlag for prosjektering av nytt kraftverk.</p>
-            <p class="nyhet-dato">Januar 2026</p>
-          </div>
-        </div>
 
       </div>
     </div>
