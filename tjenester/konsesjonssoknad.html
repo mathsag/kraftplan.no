@@ -155,11 +155,10 @@
       .nve-accordion { display: flex; }
     }
 
-    /* FOOTER */
+        /* FOOTER */
     footer { background: var(--green-950); color: var(--off-white); }
     .footer-top { display: grid; gap: 3rem; padding: 4rem 0 3rem; }
     @media (min-width: 768px) { .footer-top { grid-template-columns: 4fr 7fr; } }
-    .footer-tagline { font-family: 'DM Serif Display', serif; font-size: clamp(1.5rem, 2.5vw, 2rem); line-height: 1.25; }
     .footer-cols { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
     @media (min-width: 640px) { .footer-cols { grid-template-columns: repeat(3, 1fr); } }
     .footer-col-heading { font-size: 0.65rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.2em; color: rgba(249,248,245,0.35); }
@@ -169,7 +168,7 @@
     .footer-bottom { border-top: 1px solid rgba(249,248,245,0.07); padding: 1.25rem 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(249,248,245,0.25); }
     .footer-mobile { display: none; }
     @media (max-width: 767px) {
-      .footer-top { display: none; }
+      .footer-top { display: none !important; }
       .footer-mobile { display: block; padding: 3rem 0 2rem; }
       .footer-desktop-tagline { display: none; }
     }
@@ -526,13 +525,13 @@
       <div class="footer-col">
         <p class="footer-col-heading">Tjenester</p>
         <ul>
-          <li><a href="konsesjonssoknad.html">Konsesjonssøknad</a></li>
-          <li><a href="planendringssoknad.html">Planendringssøknad</a></li>
-          <li><a href="mulighetsstudie.html">Mulighetsstudie</a></li>
-          <li><a href="konsekvensutredning.html">Konsekvensutredning</a></li>
-          <li><a href="bistand.html">Bistand i høring</a></li>
-          <li><a href="kommunale-forhold.html">Kommunale forhold</a></li>
-          <li><a href="drone.html">Droneoppdrag</a></li>
+          <li><a href="../tjenester/konsesjonssoknad.html">Konsesjonssøknad</a></li>
+          <li><a href="../tjenester/planendringssoknad.html">Planendringssøknad</a></li>
+          <li><a href="../tjenester/mulighetsstudie.html">Mulighetsstudie</a></li>
+          <li><a href="../tjenester/konsekvensutredning.html">Konsekvensutredning</a></li>
+          <li><a href="../tjenester/bistand.html">Bistand i høring</a></li>
+          <li><a href="../tjenester/kommunale-forhold.html">Kommunale forhold</a></li>
+          <li><a href="../tjenester/drone.html">Droneoppdrag</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -548,13 +547,12 @@
         <ul>
           <li><a href="tel:+4748193444">+47 481 93 444</a></li>
           <li><a href="mailto:kasper.sagen@kraftplan.no">kasper.sagen@kraftplan.no</a></li>
-          <li><a href="https://w2.brreg.no/enhet/sok/detalj.jsp?orgnr=933873870" target="_blank" rel="noopener">Org.nr 933 873 870</a></li>
+          <li><span style="color:rgba(249,248,245,0.6);">Org.nr 933 873 870</span></li>
         </ul>
       </div>
     </div>
   </div>
 
-  <!-- Mobil-footer -->
   <div class="wrap footer-mobile">
     <img src="../bilder/logo.png" alt="Kraftplan" style="height:52px;width:auto;display:block;filter:brightness(0) invert(1);opacity:0.85;" />
     <div style="margin-top:2rem;display:flex;flex-direction:column;gap:0.6rem;border-top:1px solid rgba(249,248,245,0.1);padding-top:1.5rem;">
