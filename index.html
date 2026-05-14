@@ -132,13 +132,7 @@
       footer .wrap { padding: 0 1.5rem; }
       .footer-top { padding: 5rem 0 3rem; gap: 3rem; }
       .footer-cols { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-      .footer-mobile { display: none; }
-    @media (max-width: 767px) {
-      .footer-top { display: none !important; }
-      .footer-mobile { display: block; padding: 3rem 0 2rem; }
-      .footer-desktop-tagline { display: none; }
-    }
-    .footer-bottom { padding: 2rem 0; }
+      .footer-bottom { padding: 2rem 0; }
     }
     .reveal {
       opacity: 0;
@@ -383,6 +377,119 @@
     @media (min-width: 768px) { .cta-inner { grid-template-columns: 6fr 5fr; gap: 4rem; align-items: center; } }
     .cta-body { font-size: 1rem; line-height: 1.7; color: var(--text-muted); }
 
+    /* ====== FOOTER ====== */
+    footer {
+      background: var(--green-950);
+      color: var(--off-white);
+    }
+    .footer-top {
+      display: grid; gap: 3rem;
+      padding: 4.5rem 0 3.5rem;
+    }
+    @media (min-width: 768px) { .footer-top { grid-template-columns: 4fr 7fr; gap: 5rem; } }
+    .footer-tagline {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      line-height: 1.25;
+      color: var(--off-white);
+    }
+    .footer-cols {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+    @media (min-width: 640px) { .footer-cols { grid-template-columns: repeat(3, 1fr); } }
+    .footer-col-heading {
+      font-size: 0.65rem; font-weight: 500;
+      text-transform: uppercase; letter-spacing: 0.2em;
+      color: rgba(249,248,245,0.35);
+    }
+    .footer-col ul { list-style: none; margin-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
+    .footer-col a { font-size: 0.875rem; color: rgba(249,248,245,0.6); text-decoration: none; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--off-white); }
+    .footer-bottom {
+      border-top: 1px solid rgba(249,248,245,0.07);
+      padding: 1.25rem 0;
+      display: flex; flex-wrap: wrap;
+      align-items: center; justify-content: space-between;
+      gap: 0.5rem;
+      font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: rgba(249,248,245,0.25);
+    }
+  
+    /* NVE-PROSESS */
+    .nve-grid { display: grid; gap: 0.75rem; margin-top: 2.5rem; }
+    @media (min-width: 640px) { .nve-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .nve-grid { grid-template-columns: repeat(4, 1fr); } }
+    .nve-kort { background: rgba(249,248,245,0.06); border: 1px solid rgba(249,248,245,0.1); border-radius: 6px; padding: 1.25rem; cursor: pointer; transition: all 0.25s; position: relative; }
+    .nve-kort:hover { background: rgba(249,248,245,0.1); border-color: rgba(249,248,245,0.2); }
+    .nve-kort.aktiv { background: white; border-color: white; color: var(--text); }
+    .nve-kort-nr { font-size: 0.65rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.2em; opacity: 0.4; }
+    .nve-kort.aktiv .nve-kort-nr { color: var(--green-600); opacity: 1; }
+    .nve-kort-tittel { font-family: "DM Serif Display", serif; font-size: 1.1rem; margin-top: 0.5rem; color: var(--off-white); }
+    .nve-kort.aktiv .nve-kort-tittel { color: var(--text); }
+    .nve-kort-pil { position: absolute; bottom: 1rem; right: 1rem; opacity: 0; transition: opacity 0.2s; font-size: 0.8rem; }
+    .nve-kort.aktiv .nve-kort-pil { opacity: 1; color: var(--green-600); }
+    .nve-panel { margin-top: 1.5rem; background: white; border-radius: 8px; padding: 2rem; display: none; color: var(--text); }
+    .nve-panel.aktiv { display: block; }
+    .nve-panel-grid { display: grid; gap: 1.5rem; }
+    @media (min-width: 768px) { .nve-panel-grid { grid-template-columns: 1fr 1fr; gap: 2rem; } }
+    .nve-panel-tittel { font-family: "DM Serif Display", serif; font-size: 1.5rem; }
+    .nve-panel-tekst { font-size: 0.9375rem; color: var(--text-muted); margin-top: 0.75rem; line-height: 1.7; }
+    .nve-panel-meta { margin-top: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; }
+    .nve-meta-rad { display: flex; gap: 0.75rem; font-size: 0.85rem; }
+    .nve-meta-label { font-weight: 500; color: var(--green-700); min-width: 5rem; }
+    .nve-meta-val { color: var(--text-muted); }
+    .nve-kraftplan-boks { background: var(--green-50); border-radius: 6px; padding: 1.25rem; border-left: 3px solid var(--green-600); }
+    .nve-kraftplan-label { font-size: 0.7rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.2em; color: var(--green-600); }
+    .nve-kraftplan-tekst { font-size: 0.9rem; color: var(--text-muted); margin-top: 0.5rem; line-height: 1.65; }
+
+    /* MATCHER */
+    .matcher-wrap { max-width: 680px; margin: 2.5rem auto 0; background: white; border-radius: 8px; border: 1px solid rgba(26,31,27,0.08); overflow: hidden; }
+    .matcher-steg { display: none; padding: 2rem; }
+    .matcher-steg.aktiv { display: block; }
+    .matcher-progress { height: 3px; background: var(--green-100); }
+    .matcher-progress-bar { height: 100%; background: var(--green-700); transition: width 0.4s ease; }
+    .matcher-steg-label { font-size: 0.7rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.2em; color: var(--green-600); }
+    .matcher-sporsmal { font-family: "DM Serif Display", serif; font-size: 1.375rem; margin-top: 0.5rem; }
+    .matcher-valg { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.5rem; }
+    .matcher-knapp { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.25rem; border: 1px solid rgba(26,31,27,0.1); border-radius: 6px; background: none; cursor: pointer; font-family: inherit; font-size: 0.9375rem; color: var(--text); text-align: left; transition: all 0.2s; }
+    .matcher-knapp:hover { border-color: var(--green-600); background: var(--green-50); }
+    .matcher-knapp-ikon { font-size: 1.25rem; }
+    .matcher-knapp-tittel { font-weight: 500; }
+    .matcher-knapp-sub { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.1rem; }
+    .matcher-resultat { display: none; padding: 2rem; }
+    .matcher-resultat.aktiv { display: block; }
+    .resultat-anbefaling { background: var(--green-50); border-radius: 6px; padding: 1.5rem; border-left: 3px solid var(--green-700); }
+    .resultat-label { font-size: 0.7rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.2em; color: var(--green-600); }
+    .resultat-tittel { font-family: "DM Serif Display", serif; font-size: 1.375rem; margin-top: 0.5rem; }
+    .resultat-tekst { font-size: 0.9rem; color: var(--text-muted); margin-top: 0.5rem; line-height: 1.65; }
+    .resultat-btns { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
+    .btn-sm { padding: 0.6rem 1.25rem; font-size: 0.85rem; }
+    .btn-ghost { background: none; border: 1px solid rgba(26,31,27,0.15); color: var(--text); }
+    .btn-ghost:hover { border-color: var(--green-700); color: var(--green-700); }
+
+  
+    .tj-kort {
+      background: white;
+      border-radius: 6px;
+      padding: 1.5rem;
+      text-decoration: none;
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      border: 1px solid rgba(26,31,27,0.06);
+      transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+      position: relative;
+    }
+    .tj-kort:hover { border-color: var(--green-600); box-shadow: 0 4px 20px rgba(26,31,27,0.08); transform: translateY(-2px); }
+    .tj-nr { font-size: 0.65rem; font-weight: 500; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+    .tj-tittel { font-family: "DM Serif Display", serif; font-size: 1.25rem; font-weight: 400; margin-top: 0.25rem; }
+    .tj-tekst { font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; flex: 1; }
+    .tj-pil { font-size: 0.875rem; color: var(--green-600); margin-top: 0.5rem; transition: transform 0.25s; }
+    .tj-kort:hover .tj-pil { transform: translateX(4px); }
+
   </style>
 </head>
 <body>
@@ -585,9 +692,9 @@
 <footer>
   <div class="wrap footer-top">
     <div>
-      <img src="bilder/logo.png" alt="Kraftplan" style="height:64px;width:auto;display:block;filter:brightness(0) invert(1);opacity:0.85;margin-bottom:1rem;" />
-      <p style="font-size:0.875rem;color:rgba(249,248,245,0.45);margin-top:1.5rem">Spesialister på småkraftutvikling</p>
-      <a href="kontakt.html" style="display:inline-flex;align-items:center;gap:0.4rem;margin-top:1.5rem;font-size:0.875rem;font-weight:500;color:rgba(249,248,245,0.7);text-decoration:none;">Ta kontakt →</a>
+      <img src="bilder/logo.png" alt="Kraftplan" style="height:64px;width:auto;display:block;filter:brightness(0) invert(1);opacity:0.85;margin-bottom:1rem;margin-top:0.5rem;" />
+      <p style="font-size:0.875rem;color:rgba(249,248,245,0.45);margin-top:0.75rem;line-height:1.6">Spesialister på småkraftutvikling</p>
+      <a href="mailto:kasper.sagen@kraftplan.no" class="link link-light" style="margin-top:1.5rem;display:inline-flex">Ta kontakt →</a>
     </div>
     <div class="footer-cols">
       <div class="footer-col">
@@ -607,7 +714,7 @@
         <ul>
           <li><a href="om-oss.html">Om oss</a></li>
           <li><a href="prosjekter.html">Vårt arbeid</a></li>
-          <li><a href="kontakt.html">Kontakt</a></li>
+          <li><a href="mailto:kasper.sagen@kraftplan.no">Kontakt</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -615,12 +722,14 @@
         <ul>
           <li><a href="tel:+4748193444">+47 481 93 444</a></li>
           <li><a href="mailto:kasper.sagen@kraftplan.no">kasper.sagen@kraftplan.no</a></li>
-          <li><span style="color:rgba(249,248,245,0.6);">Org.nr 933 873 870</span></li>
+          <li><a href="https://w2.brreg.no/enhet/sok/detalj.jsp?orgnr=933873870" target="_blank" rel="noopener">Org.nr 933 873 870</a></li>
         </ul>
       </div>
     </div>
   </div>
 
+  <!-- Mobil-footer -->
+  <!-- Mobil-footer -->
   <div class="wrap footer-mobile">
     <img src="bilder/logo.png" alt="Kraftplan" style="height:52px;width:auto;display:block;filter:brightness(0) invert(1);opacity:0.85;" />
     <div style="margin-top:2rem;display:flex;flex-direction:column;gap:0.6rem;border-top:1px solid rgba(249,248,245,0.1);padding-top:1.5rem;">
@@ -670,9 +779,6 @@
     document.getElementById('mobile-menu').classList.remove('open');
     document.body.style.overflow = '';
   }
-  document.querySelectorAll('.mobile-nav-label').forEach(label => {
-    label.addEventListener('click', () => { label.parentElement.classList.toggle('open'); });
-  });
 
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
