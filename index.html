@@ -4,130 +4,84 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kraftplan AS — Kraft og arealplanlegging</title>
-  <meta name="description" content="Kraftplan er spesialister på kraft- og arealplanlegging. Fra konsesjonssøknad til reguleringsplan — ett fagmiljø." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --green-50: #f4f6f4;
-      --green-100: #e4ebe5;
-      --green-600: #3d5c42;
-      --green-700: #2f4733;
-      --green-800: #243828;
-      --green-900: #192a1d;
-      --green-950: #101c13;
-      --blue: #4a7c8e;
-      --blue-light: #7aaebb;
-      --blue-pale: #e8f2f5;
-      --off-white: #f9f8f5;
-      --off-white-2: #f2f0eb;
-      --text: #1a1f1b;
-      --text-muted: rgba(26,31,27,0.6);
+      --green-600: #3d5c42; --green-700: #2f4733; --green-900: #192a1d; --green-950: #101c13;
+      --blue: #4a7c8e; --blue-light: #7aaebb;
+      --off-white: #f9f8f5; --off-white-2: #f2f0eb;
+      --text: #1a1f1b; --text-muted: rgba(26,31,27,0.6);
     }
     html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; overflow-x: hidden; }
-    body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--off-white); color: var(--text); line-height: 1.6; overflow-x: hidden; min-height: 100vh; }
-    h1, h2, h3 { font-family: 'DM Serif Display', serif; font-weight: 400; line-height: 1.1; }
-    ::selection { background: var(--green-900); color: var(--off-white); }
+    body { font-family: "DM Sans", system-ui, sans-serif; background: var(--off-white); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+    h1, h2, h3 { font-family: "DM Serif Display", serif; font-weight: 400; line-height: 1.1; }
     .wrap { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
     @media (min-width: 768px) { .wrap { padding: 0 3rem; } }
 
-    /* HEADER */
     #header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; transition: all 0.4s; }
-    #header.scrolled { background: rgba(249,248,245,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(26,31,27,0.08); }
     .header-inner { display: flex; align-items: center; justify-content: space-between; height: 4.5rem; }
-    .logo { text-decoration: none; }
     .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
-    .nav-links a { font-size: 0.875rem; font-weight: 400; color: rgba(26,31,27,0.7); text-decoration: none; transition: color 0.3s; }
-    .nav-links a:hover { color: var(--green-900); }
+    .nav-links a { font-size: 0.875rem; color: rgba(249,248,245,0.85); text-decoration: none; transition: color 0.3s; }
+    .nav-links a:hover { color: var(--off-white); }
     .nav-cta { background: var(--green-900) !important; color: var(--off-white) !important; padding: 0.5rem 1.25rem !important; border-radius: 4px; }
-    .nav-cta:hover { background: var(--green-700) !important; }
-    .hamburger { display: none; background: none; border: none; cursor: pointer; color: var(--green-900); }
+    .hamburger { display: none; background: none; border: none; cursor: pointer; color: var(--off-white); }
     @media (max-width: 767px) { .nav-links { display: none; } .hamburger { display: block; } }
 
-    /* MOBILE MENU */
     #mobile-menu { position: fixed; inset: 0; z-index: 200; background: var(--green-950); display: flex; flex-direction: column; padding: 0 1.5rem 2rem; opacity: 0; pointer-events: none; transition: opacity 0.35s; }
     #mobile-menu.open { opacity: 1; pointer-events: auto; }
     .mobile-top { display: flex; align-items: center; justify-content: space-between; height: 4.5rem; }
     .mobile-close { background: none; border: none; cursor: pointer; color: var(--off-white); }
     .mobile-nav { margin-top: 2.5rem; display: flex; flex-direction: column; }
-    .mobile-nav a { font-family: 'DM Serif Display', serif; font-size: 2.5rem; color: var(--off-white); text-decoration: none; padding: 0.6rem 0; border-bottom: 1px solid rgba(249,248,245,0.07); }
+    .mobile-nav a { font-family: "DM Serif Display", serif; font-size: 2.5rem; color: var(--off-white); text-decoration: none; padding: 0.6rem 0; border-bottom: 1px solid rgba(249,248,245,0.07); }
     .mobile-footer-nav { margin-top: auto; padding-top: 2rem; border-top: 1px solid rgba(249,248,245,0.1); font-size: 0.875rem; color: rgba(249,248,245,0.5); display: flex; flex-direction: column; gap: 0.3rem; }
     .mobile-footer-nav a { color: inherit; text-decoration: none; }
 
-    /* HERO */
-    .hero { position: relative; min-height: 100svh; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; }
-    .hero-bg { position: absolute; inset: 0; }
-    .hero-bg video { width: 100%; height: 100%; object-fit: cover; }
-    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(16,28,19,0.3) 0%, rgba(16,28,19,0.2) 40%, rgba(16,28,19,0.85) 100%); }
-    .hero-content { position: relative; padding: 9rem 0 4rem; }
+    .hero { position: relative; height: 100svh; min-height: 640px; overflow: hidden; }
+    .hero video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(16,28,19,0.35) 0%, rgba(16,28,19,0.2) 40%, rgba(16,28,19,0.9) 100%); }
+    .hero-content { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; }
+    .hero-tekst { padding: 0 0 5rem; }
     .hero-label { font-size: 0.7rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.2em; color: rgba(249,248,245,0.5); margin-bottom: 1rem; }
-    .hero-h1 { font-size: clamp(2.5rem, 6vw, 5rem); color: var(--off-white); max-width: 18ch; line-height: 1.05; }
+    .hero-h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); color: var(--off-white); max-width: 18ch; }
     .hero-h1 em { font-style: italic; color: var(--blue-light); }
     .hero-sub { font-size: 1.0625rem; color: rgba(249,248,245,0.65); margin-top: 1.25rem; max-width: 36rem; }
-    .hero-cta { margin-top: 2rem; display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 1.75rem; border-radius: 4px; font-size: 0.875rem; font-weight: 500; text-decoration: none; border: 1px solid rgba(249,248,245,0.4); color: var(--off-white); background: rgba(249,248,245,0.08); backdrop-filter: blur(8px); transition: all 0.25s; }
-    .hero-cta:hover { background: rgba(249,248,245,0.18); border-color: rgba(249,248,245,0.6); }
+    .hero-cta { margin-top: 2rem; display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 1.75rem; border-radius: 4px; font-size: 0.875rem; font-weight: 500; text-decoration: none; border: 1px solid rgba(249,248,245,0.35); color: var(--off-white); background: rgba(249,248,245,0.08); backdrop-filter: blur(8px); transition: all 0.25s; }
+    .hero-cta:hover { background: rgba(249,248,245,0.18); }
 
-    /* FAGOMRÅDER */
-    .fagomrader { padding: 0 0 6rem; position: relative; }
-    .fagomrader-grid { display: grid; gap: 1rem; margin-top: -4rem; position: relative; z-index: 10; }
+    .fagomrader { background: var(--off-white); padding: 0 0 5rem; }
+    .fagomrader-grid { display: grid; gap: 1rem; margin-top: -5rem; position: relative; z-index: 10; }
     @media (min-width: 640px) { .fagomrader-grid { grid-template-columns: 1fr 1fr; } }
-
     .fagkort { background: var(--off-white); border-radius: 12px; padding: 2.5rem 2rem; text-decoration: none; color: var(--text); display: flex; flex-direction: column; gap: 1rem; transition: all 0.3s; box-shadow: 0 4px 32px rgba(0,0,0,0.08); border: 1px solid rgba(26,31,27,0.06); }
     .fagkort:hover { transform: translateY(-4px); box-shadow: 0 12px 48px rgba(0,0,0,0.14); }
     .fagkort-ikon { width: 2.5rem; height: 2.5rem; color: var(--green-700); }
-    .fagkort-tittel { font-family: 'DM Serif Display', serif; font-size: 1.5rem; }
+    .fagkort-tittel { font-family: "DM Serif Display", serif; font-size: 1.5rem; }
     .fagkort-sub { font-size: 0.9rem; color: var(--text-muted); }
-    .fagkort-pil { margin-top: auto; font-size: 0.875rem; color: var(--green-600); display: flex; align-items: center; gap: 0.4rem; padding-top: 1rem; border-top: 1px solid rgba(26,31,27,0.06); transition: gap 0.2s; }
+    .fagkort-pil { margin-top: auto; font-size: 0.875rem; color: var(--green-600); padding-top: 1rem; border-top: 1px solid rgba(26,31,27,0.06); display: flex; align-items: center; gap: 0.4rem; transition: gap 0.2s; }
     .fagkort:hover .fagkort-pil { gap: 0.75rem; }
-
     .fagkort-kraft { border-top: 3px solid var(--green-700); }
     .fagkort-areal { border-top: 3px solid var(--blue); }
     .fagkort-areal .fagkort-ikon { color: var(--blue); }
     .fagkort-areal .fagkort-pil { color: var(--blue); }
 
-    /* OM OSS STRIPE */
-    .om-stripe { padding: 5rem 0; background: var(--off-white-2); }
-    .om-grid { display: grid; gap: 3rem; }
-    @media (min-width: 768px) { .om-grid { grid-template-columns: 1fr 1fr; align-items: center; } }
-    .om-label { font-size: 0.7rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.2em; color: var(--green-600); }
-    .om-h2 { font-size: clamp(1.75rem, 3vw, 2.5rem); margin-top: 0.75rem; }
-    .om-tekst { font-size: 1rem; color: var(--text-muted); line-height: 1.75; margin-top: 1rem; }
-    .om-metode { display: grid; gap: 0.5rem; margin-top: 1.5rem; }
-    .om-metode-rad { display: flex; align-items: center; gap: 0.75rem; font-size: 0.9rem; color: var(--text-muted); }
-    .om-metode-rad::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green-600); flex-shrink: 0; }
-
-    /* NYHETER */
-    .nyheter { padding: 5rem 0; }
+    .nyheter { padding: 5rem 0 6rem; background: var(--off-white-2); }
     .seksjon-label { font-size: 0.7rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.2em; color: var(--green-600); }
-    .seksjon-h2 { font-size: clamp(1.75rem, 3vw, 2.5rem); margin-top: 0.75rem; }
-    .nyhet-grid { display: grid; gap: 1rem; margin-top: 2.5rem; }
+    .seksjon-h2 { font-size: clamp(1.75rem, 3vw, 2.5rem); margin-top: 0.75rem; margin-bottom: 2.5rem; }
+    .nyhet-grid { display: grid; gap: 1rem; }
     @media (min-width: 640px) { .nyhet-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (min-width: 1024px) { .nyhet-grid { grid-template-columns: repeat(3, 1fr); } }
-    .nyhet-kort { background: white; border-radius: 8px; overflow: hidden; text-decoration: none; color: var(--text); display: flex; flex-direction: column; border: 1px solid rgba(26,31,27,0.07); transition: all 0.25s; }
+    .nyhet-kort { background: white; border-radius: 8px; overflow: hidden; color: var(--text); display: flex; flex-direction: column; border: 1px solid rgba(26,31,27,0.07); transition: all 0.25s; }
     .nyhet-kort:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
-    .nyhet-bilde { aspect-ratio: 16/9; overflow: hidden; }
-    .nyhet-bilde img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
-    .nyhet-kort:hover .nyhet-bilde img { transform: scale(1.04); }
+    .nyhet-bilde { aspect-ratio: 16/9; background: var(--off-white-2); display: flex; align-items: center; justify-content: center; font-size: 3rem; color: rgba(26,31,27,0.15); }
     .nyhet-innhold { padding: 1.25rem; flex: 1; display: flex; flex-direction: column; }
     .nyhet-tag { font-size: 0.65rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.18em; color: var(--green-600); margin-bottom: 0.5rem; }
     .nyhet-tag-areal { color: var(--blue); }
-    .nyhet-tittel { font-family: 'DM Serif Display', serif; font-size: 1.1rem; line-height: 1.3; }
+    .nyhet-tittel { font-family: "DM Serif Display", serif; font-size: 1.1rem; line-height: 1.3; }
     .nyhet-tekst { font-size: 0.875rem; color: var(--text-muted); margin-top: 0.5rem; line-height: 1.6; flex: 1; }
     .nyhet-dato { font-size: 0.75rem; color: var(--text-muted); margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid rgba(26,31,27,0.07); }
 
-    /* CTA */
-    .cta-strip { background: var(--green-900); color: var(--off-white); padding: 5rem 0; }
-    .cta-inner { display: grid; gap: 2rem; align-items: center; }
-    @media (min-width: 768px) { .cta-inner { grid-template-columns: 1fr auto; } }
-    .cta-h2 { font-size: clamp(1.5rem, 3vw, 2.25rem); color: var(--off-white); }
-    .cta-sub { font-size: 0.9375rem; color: rgba(249,248,245,0.6); margin-top: 0.5rem; }
-    .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 1.75rem; border-radius: 4px; font-size: 0.875rem; font-weight: 500; text-decoration: none; transition: all 0.25s; font-family: inherit; }
-    .btn-light { background: var(--off-white); color: var(--green-900); }
-    .btn-light:hover { background: white; }
-
-    /* FOOTER */
     footer { background: var(--green-950); color: var(--off-white); }
     .footer-top { display: grid; gap: 3rem; padding: 4rem 0 3rem; }
     @media (min-width: 768px) { .footer-top { grid-template-columns: 4fr 7fr; } }
@@ -143,54 +97,40 @@
       footer { overflow-x: hidden; width: 100%; max-width: 100vw; }
       .footer-top { display: none !important; }
       .footer-mobile { display: block; padding: 3rem 1.5rem 2.5rem; width: 100%; max-width: 100%; box-sizing: border-box; }
-      .footer-mobile img { display: block; max-width: 100%; }
-      .footer-mobile div { width: 100%; max-width: 100%; box-sizing: border-box; }
       .footer-bottom { padding: 1.25rem 1.5rem; color: rgba(249,248,245,0.5); max-width: 100%; box-sizing: border-box; }
       .footer-desktop-tagline { display: none; }
     }
-
-    /* REVEAL */
     .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .reveal.visible { opacity: 1; transform: none; }
   </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <header id="header" style="background:transparent;">
   <div class="wrap header-inner">
-    <a href="index.html" class="logo">
-      <img src="bilder/logo.png" alt="Kraftplan" style="height:44px;width:auto;display:block;" id="logo-img" />
-    </a>
+    <a href="index.html"><img src="bilder/logo.png" alt="Kraftplan" style="height:44px;width:auto;display:block;" /></a>
     <nav>
       <ul class="nav-links">
         <li><a href="#fagomrader">Fagområder</a></li>
-        <li><a href="prosjekter.html">Vårt arbeid</a></li>
         <li><a href="om-oss.html">Om oss</a></li>
         <li><a href="mailto:kasper.sagen@kraftplan.no" class="nav-cta">Kontakt</a></li>
       </ul>
     </nav>
     <button class="hamburger" onclick="openMenu()" aria-label="Åpne meny">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <path d="M4 7h16M4 17h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-      </svg>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 17h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
     </button>
   </div>
 </header>
 
-<!-- MOBILE MENU -->
 <div id="mobile-menu">
   <div class="mobile-top">
     <img src="bilder/logo.png" alt="Kraftplan" style="height:40px;width:auto;display:block;" />
     <button class="mobile-close" onclick="closeMenu()">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-      </svg>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
     </button>
   </div>
   <nav class="mobile-nav">
     <a href="#fagomrader" onclick="closeMenu()">Fagområder</a>
-    <a href="prosjekter.html" onclick="closeMenu()">Vårt arbeid</a>
     <a href="om-oss.html" onclick="closeMenu()">Om oss</a>
     <a href="mailto:kasper.sagen@kraftplan.no" onclick="closeMenu()">Kontakt</a>
   </nav>
@@ -200,136 +140,80 @@
   </div>
 </div>
 
-<!-- HERO -->
 <section class="hero">
-  <div class="hero-bg">
-    <video autoplay loop muted playsinline>
-      <source src="dronevideo.mp4" type="video/mp4" />
-    </video>
-  </div>
+  <video autoplay loop muted playsinline>
+    <source src="dronevideo.mp4" type="video/mp4" />
+  </video>
   <div class="hero-overlay"></div>
-  <div class="wrap hero-content">
-    <p class="hero-label">Kraftplan AS</p>
-    <h1 class="hero-h1">Spesialister på <em>kraft- og arealplanlegging.</em></h1>
-    <p class="hero-sub">Fra konsesjonssøknad til reguleringsplan — ett fagmiljø.</p>
-    <a href="#fagomrader" class="hero-cta">Se fagområder ↓</a>
+  <div class="hero-content">
+    <div class="wrap hero-tekst">
+      <p class="hero-label">Kraftplan AS</p>
+      <h1 class="hero-h1">Spesialister på <em>kraft- og arealplanlegging.</em></h1>
+      <p class="hero-sub">Fra konsesjonssøknad til reguleringsplan — ett fagmiljø.</p>
+      <a href="#fagomrader" class="hero-cta">Se fagområder ↓</a>
+    </div>
   </div>
 </section>
 
-<!-- FAGOMRÅDER -->
 <section class="fagomrader" id="fagomrader">
   <div class="wrap">
     <div class="fagomrader-grid">
-
-      <!-- KRAFT -->
-      <a href="kraft.html" class="fagkort fagkort-kraft reveal">
-        <svg class="fagkort-ikon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+      <a href="kraft/index.html" class="fagkort fagkort-kraft reveal">
+        <svg class="fagkort-ikon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <div>
           <div class="fagkort-tittel">Småkraftutvikling</div>
           <div class="fagkort-sub">Fra mulighetsstudie til konsesjon</div>
         </div>
         <div class="fagkort-pil">Utforsk fagområdet →</div>
       </a>
-
-      <!-- AREALPLAN -->
       <a href="arealplan/index.html" class="fagkort fagkort-areal reveal" style="transition-delay:0.1s">
-        <svg class="fagkort-ikon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+        <svg class="fagkort-ikon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <div>
           <div class="fagkort-tittel">Arealplanlegging</div>
           <div class="fagkort-sub">Reguleringsplaner og planfaglig bistand</div>
         </div>
         <div class="fagkort-pil">Utforsk fagområdet →</div>
       </a>
-
     </div>
   </div>
 </section>
 
-<!-- OM OSS -->
-<section class="om-stripe">
-  <div class="wrap">
-    <div class="om-grid">
-      <div class="reveal">
-        <p class="om-label">Én felles metodikk</p>
-        <h2 class="om-h2">To fagområder — ett samlet fagmiljø.</h2>
-        <p class="om-tekst">Selv om fagområdene er ulike, bygger arbeidet på samme metodiske tilnærming. Dette gjør det mulig å arbeide helhetlig på tvers av kraft, areal og naturfaglige problemstillinger.</p>
-      </div>
-      <div class="reveal" style="transition-delay:0.1s">
-        <div class="om-metode">
-          <div class="om-metode-rad">GIS og terrenganalyse</div>
-          <div class="om-metode-rad">Hydrologiske og tekniske vurderinger</div>
-          <div class="om-metode-rad">Datadrevet analyse</div>
-          <div class="om-metode-rad">Tydelige planprosesser</div>
-          <div class="om-metode-rad">Strukturert dokumentasjon</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SISTE NYHETER / PROSJEKTER -->
 <section class="nyheter">
   <div class="wrap">
-    <p class="seksjon-label reveal">Siste prosjekter</p>
-    <h2 class="seksjon-h2 reveal">Hva vi jobber med.</h2>
+    <p class="seksjon-label reveal">Siste nytt</p>
+    <h2 class="seksjon-h2 reveal">Prosjekter og oppdateringer.</h2>
     <div class="nyhet-grid">
-
-      <a href="prosjekter/produksjonsberegning.html" class="nyhet-kort reveal" style="transition-delay:0.05s">
-        <div class="nyhet-bilde">
-          <img src="bilder/prosjekter/prod-beregning.jpg" alt="Produksjonsberegning" />
-        </div>
+      <div class="nyhet-kort reveal" style="transition-delay:0.05s">
+        <div class="nyhet-bilde">⚡</div>
         <div class="nyhet-innhold">
           <p class="nyhet-tag">Kraft</p>
-          <p class="nyhet-tittel">Produksjonsberegning for småkraftverk i Hordaland</p>
-          <p class="nyhet-tekst">Estimering av energiproduksjon og reguleringseffekter basert på hydrologiske data og terrengmodell.</p>
+          <p class="nyhet-tittel">Konsesjonssøknad innlevert for småkraftverk i Vestland</p>
+          <p class="nyhet-tekst">Kraftplan har bistått utbygger med komplett konsesjonssøknad inkludert hydrologiske analyser og miljøvurderinger.</p>
           <p class="nyhet-dato">Mai 2026</p>
         </div>
-      </a>
-
-      <a href="prosjekter/hydrologi.html" class="nyhet-kort reveal" style="transition-delay:0.1s">
-        <div class="nyhet-bilde">
-          <img src="bilder/prosjekter/hydrologi.jpg" alt="Hydrologi" />
-        </div>
-        <div class="nyhet-innhold">
-          <p class="nyhet-tag">Kraft</p>
-          <p class="nyhet-tittel">Hydrologisk analyse av nedbørfelt i Sogn og Fjordane</p>
-          <p class="nyhet-tekst">Analyse av vannføringsdata og vannbalanse for vassdrag og nedbørfelt.</p>
-          <p class="nyhet-dato">April 2026</p>
-        </div>
-      </a>
-
-      <a href="prosjekter/kart.html" class="nyhet-kort reveal" style="transition-delay:0.15s">
-        <div class="nyhet-bilde">
-          <img src="bilder/prosjekter/kart.jpg" alt="Kart" />
-        </div>
+      </div>
+      <div class="nyhet-kort reveal" style="transition-delay:0.1s">
+        <div class="nyhet-bilde">🗺</div>
         <div class="nyhet-innhold">
           <p class="nyhet-tag nyhet-tag-areal">Arealplan</p>
-          <p class="nyhet-tittel">Kartutarbeidelse for reguleringsplan i Vestland</p>
-          <p class="nyhet-tekst">Skreddersydde kartløsninger for planlegging og konsesjonssøknader.</p>
+          <p class="nyhet-tittel">Reguleringsplan for boligutvikling i Rogaland</p>
+          <p class="nyhet-tekst">Planfaglig bistand gjennom hele planprosessen, fra oppstartsmøte til vedtak i kommunestyret.</p>
+          <p class="nyhet-dato">April 2026</p>
+        </div>
+      </div>
+      <div class="nyhet-kort reveal" style="transition-delay:0.15s">
+        <div class="nyhet-bilde">📊</div>
+        <div class="nyhet-innhold">
+          <p class="nyhet-tag">Kraft</p>
+          <p class="nyhet-tittel">HEC-RAS simulering for vassdrag i Trøndelag</p>
+          <p class="nyhet-tekst">Vannlinjeberegninger for å vurdere utbyggingspåvirkning og flomrisiko langs vassdrag.</p>
           <p class="nyhet-dato">Mars 2026</p>
         </div>
-      </a>
-
+      </div>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
-<section class="cta-strip">
-  <div class="wrap cta-inner">
-    <div>
-      <h2 class="cta-h2">Har du et prosjekt vi kan hjelpe med?</h2>
-      <p class="cta-sub">Ta kontakt for en uforpliktende prat om ditt prosjekt.</p>
-    </div>
-    <a href="mailto:kasper.sagen@kraftplan.no" class="btn btn-light">Ta kontakt</a>
-  </div>
-</section>
-
-<!-- FOOTER -->
 <footer>
   <div class="wrap footer-top">
     <div>
@@ -341,7 +225,7 @@
       <div class="footer-col">
         <p class="footer-col-heading">Fagområder</p>
         <ul>
-          <li><a href="kraft.html">Småkraftutvikling</a></li>
+          <li><a href="kraft/index.html">Småkraftutvikling</a></li>
           <li><a href="arealplan/index.html">Arealplanlegging</a></li>
         </ul>
       </div>
@@ -349,7 +233,6 @@
         <p class="footer-col-heading">Selskapet</p>
         <ul>
           <li><a href="om-oss.html">Om oss</a></li>
-          <li><a href="prosjekter.html">Vårt arbeid</a></li>
           <li><a href="mailto:kasper.sagen@kraftplan.no">Kontakt</a></li>
         </ul>
       </div>
@@ -363,7 +246,6 @@
       </div>
     </div>
   </div>
-
   <div class="wrap footer-mobile">
     <img src="bilder/logo.png" alt="Kraftplan" style="height:48px;width:auto;display:block;filter:brightness(0) invert(1);opacity:0.85;" />
     <div style="margin-top:1.5rem;display:flex;flex-direction:column;gap:0.5rem;">
@@ -372,7 +254,6 @@
       <span style="font-size:0.875rem;color:rgba(249,248,245,0.4);">Org.nr 933 873 870</span>
     </div>
   </div>
-
   <div class="wrap footer-bottom">
     <span>© 2026 Kraftplan AS</span>
     <span class="footer-desktop-tagline">Effektiv planlegging, bærekraftig kraft</span>
@@ -380,32 +261,30 @@
 </footer>
 
 <script>
-  const header = document.getElementById('header');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > window.innerHeight * 0.6) {
-      header.style.background = 'rgba(249,248,245,0.95)';
-      header.style.backdropFilter = 'blur(12px)';
-      header.style.borderBottom = '1px solid rgba(26,31,27,0.08)';
-      header.querySelectorAll('a:not(.nav-cta)').forEach(a => a.style.color = '');
-      header.querySelector('.hamburger').style.color = 'var(--green-900)';
+  const header = document.getElementById("header");
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > window.innerHeight * 0.7) {
+      header.style.background = "rgba(249,248,245,0.95)";
+      header.style.backdropFilter = "blur(12px)";
+      header.style.borderBottom = "1px solid rgba(26,31,27,0.08)";
+      header.querySelectorAll("a:not(.nav-cta)").forEach(a => a.style.color = "");
+      header.querySelector(".hamburger").style.color = "var(--green-900)";
     } else {
-      header.style.background = 'transparent';
-      header.style.backdropFilter = '';
-      header.style.borderBottom = 'none';
-      header.querySelectorAll('a:not(.nav-cta)').forEach(a => a.style.color = 'rgba(249,248,245,0.85)');
-      header.querySelector('.hamburger').style.color = 'var(--off-white)';
+      header.style.background = "transparent";
+      header.style.backdropFilter = "";
+      header.style.borderBottom = "none";
+      header.querySelectorAll("a:not(.nav-cta)").forEach(a => a.style.color = "rgba(249,248,245,0.85)");
+      header.querySelector(".hamburger").style.color = "var(--off-white)";
     }
   }, { passive: true });
-  header.querySelectorAll('a:not(.nav-cta)').forEach(a => a.style.color = 'rgba(249,248,245,0.85)');
-  header.querySelector('.hamburger').style.color = 'var(--off-white)';
-
-  function openMenu() { document.getElementById('mobile-menu').classList.add('open'); document.body.style.overflow = 'hidden'; }
-  function closeMenu() { document.getElementById('mobile-menu').classList.remove('open'); document.body.style.overflow = ''; }
-
+  header.querySelectorAll("a:not(.nav-cta)").forEach(a => a.style.color = "rgba(249,248,245,0.85)");
+  header.querySelector(".hamburger").style.color = "var(--off-white)";
+  function openMenu() { document.getElementById("mobile-menu").classList.add("open"); document.body.style.overflow = "hidden"; }
+  function closeMenu() { document.getElementById("mobile-menu").classList.remove("open"); document.body.style.overflow = ""; }
   const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visible"); io.unobserve(e.target); } });
   }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
 </script>
 </body>
 </html>
