@@ -29,6 +29,17 @@
     .nav-cta { background: rgba(249,248,245,0.15) !important; color: var(--off-white) !important; padding: 0.5rem 1.25rem !important; border-radius: 4px; border: 1px solid rgba(249,248,245,0.25) !important; backdrop-filter: blur(8px); }
     .nav-cta:hover { background: rgba(249,248,245,0.25) !important; }
     .hamburger { display: none; background: none; border: none; cursor: pointer; color: var(--off-white); }
+    .nav-dropdown { position: relative; }
+    .nav-dropdown > a { display: flex; align-items: center; gap: 0.3rem; cursor: pointer; }
+    .nav-dropdown > a::after { content: ""; width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 4px solid currentColor; opacity: 0.6; transition: transform 0.3s; }
+    .nav-dropdown:hover > a::after { transform: rotate(180deg); }
+    .dropdown-menu { position: absolute; top: calc(100% + 0.5rem); left: 50%; transform: translateX(-50%); background: rgba(249,248,245,0.97); backdrop-filter: blur(20px); border-radius: 8px; box-shadow: 0 8px 32px rgba(0,0,0,0.12); border: 1px solid rgba(26,31,27,0.08); min-width: 220px; padding: 0.5rem; opacity: 0; pointer-events: none; transition: opacity 0.2s, transform 0.2s; transform: translateX(-50%) translateY(6px); }
+    .nav-dropdown:hover .dropdown-menu { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+    .dropdown-menu a { display: flex; align-items: center; gap: 0.75rem; padding: 0.6rem 0.75rem; font-size: 0.875rem; color: rgba(26,31,27,0.75) !important; text-decoration: none; border-radius: 6px; transition: background 0.15s; white-space: nowrap; }
+    .dropdown-menu a:hover { background: var(--off-white-2); color: var(--green-900) !important; }
+    .dropdown-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .dropdown-dot-kraft { background: var(--green-600); }
+    .dropdown-dot-areal { background: var(--blue); }
     @media (max-width: 767px) { .nav-links { display: none; } .hamburger { display: block; } }
 
     #mobile-menu { position: fixed; inset: 0; z-index: 200; background: var(--green-950); display: flex; flex-direction: column; padding: 0 1.5rem 2rem; opacity: 0; pointer-events: none; transition: opacity 0.35s; }
@@ -45,9 +56,9 @@
     .hero video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
     .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(16,28,19,0.4) 0%, rgba(16,28,19,0.15) 40%, rgba(16,28,19,0.85) 100%); }
     .hero-content { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; }
-    .hero-tekst { padding: 0 0 2.5rem; }
-    .hero-label { font-size: 0.7rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.2em; color: rgba(249,248,245,0.45); margin-bottom: 1.25rem; }
-    .hero-h1 { font-size: clamp(2.25rem, 4.5vw, 4rem); color: var(--off-white); max-width: 20ch; }
+    .hero-tekst { padding: 0 0 2rem; padding-top: 30vh; }
+    .hero-label { font-size: 0.75rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.2em; color: rgba(249,248,245,0.85); margin-bottom: 1.25rem; }
+    .hero-h1 { font-size: clamp(2rem, 3.5vw, 3.5rem); color: var(--off-white); max-width: 100%; white-space: nowrap; }
     .hero-h1 em { font-style: italic; color: var(--blue-light); }
     .hero-sub { font-size: 1rem; color: rgba(249,248,245,0.6); margin-top: 1rem; max-width: 36rem; }
 
@@ -59,7 +70,7 @@
     /* FAGKORT I HERO */
     .fagkort-grid { display: grid; gap: 1rem; margin-top: 2rem; }
     @media (min-width: 640px) { .fagkort-grid { grid-template-columns: 1fr 1fr; } }
-    .fagkort { display: flex; flex-direction: column; gap: 0.5rem; padding: 1.5rem; border-radius: 12px; text-decoration: none; color: var(--off-white); background: rgba(16,28,19,0.4); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(249,248,245,0.12); transition: all 0.3s; position: relative; overflow: hidden; }
+    .fagkort { display: flex; flex-direction: column; gap: 0.75rem; padding: 2rem 1.75rem; border-radius: 12px; text-decoration: none; color: var(--off-white); background: rgba(16,28,19,0.4); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(249,248,245,0.12); transition: all 0.3s; position: relative; overflow: hidden; }
     .fagkort::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
     .fagkort-kraft::before { background: var(--green-600); }
     .fagkort-areal::before { background: var(--blue); }
@@ -67,7 +78,7 @@
     .fagkort-label { font-size: 0.65rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.2em; color: rgba(249,248,245,0.45); }
     .fagkort-kraft .fagkort-label { color: rgba(61,92,66,0.9); }
     .fagkort-areal .fagkort-label { color: rgba(122,174,187,0.9); }
-    .fagkort-tittel { font-family: "DM Serif Display", serif; font-size: 1.25rem; color: var(--off-white); }
+    .fagkort-tittel { font-family: "DM Serif Display", serif; font-size: 1.5rem; color: var(--off-white); }
     .fagkort-sub { font-size: 0.875rem; color: rgba(249,248,245,0.55); }
     .fagkort-pil { margin-top: 0.75rem; font-size: 0.8rem; color: rgba(249,248,245,0.4); display: flex; align-items: center; gap: 0.4rem; transition: all 0.2s; }
     .fagkort:hover .fagkort-pil { color: rgba(249,248,245,0.8); gap: 0.7rem; }
@@ -130,6 +141,13 @@
     <a href="index.html"><img src="bilder/logo.png" alt="Kraftplan" style="height:44px;width:auto;display:block;" /></a>
     <nav>
       <ul class="nav-links">
+        <li class="nav-dropdown">
+          <a href="#">Fagområder</a>
+          <div class="dropdown-menu">
+            <a href="kraft/index.html"><span class="dropdown-dot dropdown-dot-kraft"></span>Småkraftutvikling</a>
+            <a href="arealplan/index.html"><span class="dropdown-dot dropdown-dot-areal"></span>Arealplanlegging</a>
+          </div>
+        </li>
         <li><a href="om-oss.html">Om oss</a></li>
         <li><a href="mailto:kasper.sagen@kraftplan.no" class="nav-cta">Kontakt</a></li>
       </ul>
@@ -148,6 +166,8 @@
     </button>
   </div>
   <nav class="mobile-nav">
+    <a href="kraft/index.html" onclick="closeMenu()">Småkraftutvikling</a>
+    <a href="arealplan/index.html" onclick="closeMenu()">Arealplanlegging</a>
     <a href="om-oss.html" onclick="closeMenu()">Om oss</a>
     <a href="mailto:kasper.sagen@kraftplan.no" onclick="closeMenu()">Kontakt</a>
   </nav>
@@ -166,8 +186,7 @@
     <div class="wrap hero-tekst">
       <p class="hero-label">Kraftplan AS</p>
       <h1 class="hero-h1">
-        Spesialister på<br>
-        <em><span class="typewriter-wrap" id="typewriter"></span><span class="cursor" id="cursor"></span></em>
+        Spesialister på <em><span class="typewriter-wrap" id="typewriter"></span><span class="cursor" id="cursor"></span></em>
       </h1>
       <p class="hero-sub">Fra konsesjonssøknad til reguleringsplan — ett fagmiljø.</p>
       <div class="fagkort-grid">
