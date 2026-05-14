@@ -785,6 +785,9 @@
     document.getElementById('mobile-menu').classList.remove('open');
     document.body.style.overflow = '';
   }
+  document.querySelectorAll('.mobile-nav-label').forEach(label => {
+    label.addEventListener('click', () => { label.parentElement.classList.toggle('open'); });
+  });
 
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
