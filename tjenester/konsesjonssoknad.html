@@ -111,6 +111,22 @@
     .nve-grid { display: grid; gap: 0.75rem; margin-top: 2.5rem; }
     @media (min-width: 640px) { .nve-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (min-width: 1024px) { .nve-grid { grid-template-columns: repeat(4, 1fr); } }
+
+    .nve-desktop { display: none; }
+    @media (min-width: 768px) { .nve-desktop { display: grid; } .nve-accordion { display: none; } }
+    .nve-accordion { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 2rem; }
+    .acc-item { border-radius: 8px; overflow: hidden; border: 1px solid rgba(249,248,245,0.12); }
+    .acc-header { width: 100%; background: rgba(249,248,245,0.06); border: none; color: var(--off-white); padding: 1.1rem 1.25rem; display: flex; align-items: center; justify-content: space-between; cursor: pointer; text-align: left; gap: 1rem; }
+    .acc-header span:first-child { display: flex; flex-direction: column; gap: 0.2rem; }
+    .acc-nr { font-size: 0.65rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.18em; color: rgba(249,248,245,0.45); }
+    .acc-tittel { font-family: "DM Serif Display", serif; font-size: 1.1rem; color: var(--off-white); }
+    .acc-ikon { font-size: 1.25rem; color: rgba(249,248,245,0.5); transition: transform 0.3s; flex-shrink: 0; }
+    .acc-item.open .acc-ikon { transform: rotate(45deg); }
+    .acc-body { display: none; padding: 1.25rem; background: white; color: var(--text); }
+    .acc-item.open .acc-body { display: block; }
+    .acc-tekst { font-size: 0.9375rem; color: var(--text-muted); line-height: 1.7; }
+    .acc-meta { display: flex; gap: 0.75rem; font-size: 0.85rem; margin-top: 0.75rem; }
+    .acc-meta-label { font-weight: 500; color: var(--green-700); min-width: 5rem; }
     .nve-kort { background: rgba(249,248,245,0.06); border: 1px solid rgba(249,248,245,0.1); border-radius: 6px; padding: 1.25rem; cursor: pointer; transition: all 0.25s; position: relative; }
     .nve-kort:hover { background: rgba(249,248,245,0.1); }
     .nve-kort.aktiv { background: white; border-color: white; color: var(--text); }
@@ -247,7 +263,23 @@
 
     @media (max-width: 767px) {
       .nve-grid { grid-template-columns: 1fr; gap: 0.5rem; }
-      .nve-kort { border-radius: 6px; }
+  
+    .nve-desktop { display: none; }
+    @media (min-width: 768px) { .nve-desktop { display: grid; } .nve-accordion { display: none; } }
+    .nve-accordion { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 2rem; }
+    .acc-item { border-radius: 8px; overflow: hidden; border: 1px solid rgba(249,248,245,0.12); }
+    .acc-header { width: 100%; background: rgba(249,248,245,0.06); border: none; color: var(--off-white); padding: 1.1rem 1.25rem; display: flex; align-items: center; justify-content: space-between; cursor: pointer; text-align: left; gap: 1rem; }
+    .acc-header span:first-child { display: flex; flex-direction: column; gap: 0.2rem; }
+    .acc-nr { font-size: 0.65rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.18em; color: rgba(249,248,245,0.45); }
+    .acc-tittel { font-family: "DM Serif Display", serif; font-size: 1.1rem; color: var(--off-white); }
+    .acc-ikon { font-size: 1.25rem; color: rgba(249,248,245,0.5); transition: transform 0.3s; flex-shrink: 0; }
+    .acc-item.open .acc-ikon { transform: rotate(45deg); }
+    .acc-body { display: none; padding: 1.25rem; background: white; color: var(--text); }
+    .acc-item.open .acc-body { display: block; }
+    .acc-tekst { font-size: 0.9375rem; color: var(--text-muted); line-height: 1.7; }
+    .acc-meta { display: flex; gap: 0.75rem; font-size: 0.85rem; margin-top: 0.75rem; }
+    .acc-meta-label { font-weight: 500; color: var(--green-700); min-width: 5rem; }
+    .nve-kort { border-radius: 6px; }
       .nve-panel { margin-top: 0; border-radius: 0 0 6px 6px; }
       .nve-panel.aktiv { display: block; }
       .nve-kort.aktiv { border-radius: 6px 6px 0 0; }
@@ -405,7 +437,8 @@
     <h2 style="font-size:clamp(1.75rem,3.5vw,2.75rem);color:var(--off-white);margin-top:0.75rem">Forstå konsesjonsprosessen</h2>
     <p style="font-size:0.9375rem;color:rgba(249,248,245,0.5);margin-top:0.75rem">Klikk på en fase for å lære mer om hva den innebærer.</p>
 
-    <div class="nve-grid">
+    <!-- Desktop grid -->
+    <div class="nve-grid nve-desktop">
       <div class="nve-kort aktiv" onclick="velgNVE(0)">
         <div class="nve-kort-nr">Fase 01</div>
         <div class="nve-kort-tittel">Melding og utredningsprogram</div>
@@ -425,6 +458,55 @@
         <div class="nve-kort-nr">Fase 04</div>
         <div class="nve-kort-tittel">Vedtak og klage</div>
         <div class="nve-kort-pil">↓</div>
+      </div>
+    </div>
+
+    <!-- Mobil accordion -->
+    <div class="nve-accordion">
+      <div class="acc-item">
+        <button class="acc-header" onclick="toggleAcc(0)">
+          <span><span class="acc-nr">Fase 01</span><span class="acc-tittel">Melding og utredningsprogram</span></span>
+          <span class="acc-ikon">+</span>
+        </button>
+        <div class="acc-body">
+          <p class="acc-tekst">Utbygger sender melding til NVE med beskrivelse av prosjektet. NVE sender meldingen på høring og fastsetter et program for konsekvensutredning.</p>
+          <div class="acc-meta"><span class="acc-meta-label">Typisk tid</span><span>2–6 måneder</span></div>
+          <div class="acc-meta"><span class="acc-meta-label">Gjelder</span><span>Prosjekter over 1 MW</span></div>
+          <div class="nve-kraftplan-boks" style="margin-top:1rem"><p class="nve-kraftplan-label">Kraftplan bistår med</p><p class="nve-kraftplan-tekst">Utarbeidelse av meldingsdokument og dialog med NVE om utredningsprogrammet.</p></div>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-header" onclick="toggleAcc(1)">
+          <span><span class="acc-nr">Fase 02</span><span class="acc-tittel">Konsekvensutredning</span></span>
+          <span class="acc-ikon">+</span>
+        </button>
+        <div class="acc-body">
+          <p class="acc-tekst">Faglige utredninger av naturmiljø, hydrologi, kulturmiljø, landskap og samfunnsmessige forhold gjennomføres basert på utredningsprogrammet.</p>
+          <div class="acc-meta"><span class="acc-meta-label">Typisk tid</span><span>3–12 måneder</span></div>
+          <div class="nve-kraftplan-boks" style="margin-top:1rem"><p class="nve-kraftplan-label">Kraftplan bistår med</p><p class="nve-kraftplan-tekst">Koordinering av fagutredninger og sammenstilling av konsekvensutredningen.</p></div>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-header" onclick="toggleAcc(2)">
+          <span><span class="acc-nr">Fase 03</span><span class="acc-tittel">Søknad og høring</span></span>
+          <span class="acc-ikon">+</span>
+        </button>
+        <div class="acc-body">
+          <p class="acc-tekst">Konsesjonssøknaden sendes NVE og legges ut på offentlig høring. NVE gjennomfører befaring og møter med tiltakshaver og berørte kommuner.</p>
+          <div class="acc-meta"><span class="acc-meta-label">Høringsfrist</span><span>Min. 6 uker</span></div>
+          <div class="nve-kraftplan-boks" style="margin-top:1rem"><p class="nve-kraftplan-label">Kraftplan bistår med</p><p class="nve-kraftplan-tekst">Utarbeidelse av søknadsdokument, innsending og håndtering av høringsuttalelser.</p></div>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-header" onclick="toggleAcc(3)">
+          <span><span class="acc-nr">Fase 04</span><span class="acc-tittel">Vedtak og klage</span></span>
+          <span class="acc-ikon">+</span>
+        </button>
+        <div class="acc-body">
+          <p class="acc-tekst">NVE fatter vedtak om konsesjon, avslag eller utsettelse. Vedtaket kan påklages til Olje- og energidepartementet innen tre uker.</p>
+          <div class="acc-meta"><span class="acc-meta-label">Klagefrist</span><span>3 uker fra vedtaksdato</span></div>
+          <div class="nve-kraftplan-boks" style="margin-top:1rem"><p class="nve-kraftplan-label">Kraftplan bistår med</p><p class="nve-kraftplan-tekst">Gjennomgang av vedtaket og bistand ved eventuell klage til OED.</p></div>
+        </div>
       </div>
     </div>
 
@@ -586,6 +668,14 @@
   });
   function closeMenu() { document.getElementById('mobile-menu').classList.remove('open'); document.body.style.overflow = ''; }
 
+
+  function toggleAcc(idx) {
+    const items = document.querySelectorAll('.acc-item');
+    items.forEach((item, i) => {
+      if (i === idx) item.classList.toggle('open');
+      else item.classList.remove('open');
+    });
+  }
   function velgNVE(idx) {
     document.querySelectorAll('.nve-kort').forEach((el,i) => el.classList.toggle('aktiv', i===idx));
     document.querySelectorAll('.nve-panel').forEach((el,i) => el.classList.toggle('aktiv', i===idx));
