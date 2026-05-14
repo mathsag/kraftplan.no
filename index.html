@@ -58,9 +58,9 @@
     .hero-content { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: space-between; }
     .hero-tekst { padding: 0 0 2rem; padding-top: 30vh; }
     .hero-label { font-size: 0.75rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.2em; color: rgba(249,248,245,0.85); margin-bottom: 1.25rem; }
-    .hero-h1 { font-size: clamp(2rem, 3.5vw, 3.5rem); color: var(--off-white); text-align: left; width: 100%; }
-    .hero-h1-linje1 { display: block; }
-    .hero-h1-linje2 { display: block; min-height: 1.2em; white-space: nowrap; }
+    .hero-h1 { font-size: clamp(2rem, 3.5vw, 3.5rem); color: var(--off-white); display: inline-block; }
+    .hero-h1-linje1 { display: block; white-space: nowrap; }
+    .hero-h1-linje2 { display: block; min-height: 1.2em; white-space: nowrap; text-align: left; }
     .hero-h1 em { font-style: italic; color: var(--blue-light); }
     .hero-sub { font-size: 1rem; color: rgba(249,248,245,0.6); margin-top: 1rem; max-width: 36rem; }
 
@@ -72,7 +72,7 @@
     /* FAGKORT I HERO */
     .fagkort-grid { display: grid; gap: 1rem; margin-top: 0; padding: 2rem 0; }
     @media (min-width: 640px) { .fagkort-grid { grid-template-columns: 1fr 1fr; } }
-    .fagkort { display: flex; flex-direction: column; gap: 0.75rem; padding: 2.5rem 2.25rem; border-radius: 12px; text-decoration: none; color: var(--off-white); background: rgba(16,28,19,0.4); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(249,248,245,0.12); transition: all 0.3s; position: relative; overflow: hidden; }
+    .fagkort { display: flex; flex-direction: column; gap: 0.75rem; padding: 2.5rem 2.25rem; border-radius: 12px; text-decoration: none; color: var(--off-white); background: rgba(10,20,12,0.65); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(249,248,245,0.15); transition: all 0.3s; position: relative; overflow: hidden; }
     .fagkort::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
     .fagkort-kraft::before { background: var(--green-600); }
     .fagkort-areal::before { background: var(--blue); }
@@ -81,8 +81,8 @@
     .fagkort-kraft .fagkort-label { color: rgba(61,92,66,0.9); }
     .fagkort-areal .fagkort-label { color: rgba(122,174,187,0.9); }
     .fagkort-tittel { font-family: "DM Serif Display", serif; font-size: 1.75rem; color: var(--off-white); }
-    .fagkort-sub { font-size: 1rem; color: rgba(249,248,245,0.55); }
-    .fagkort-pil { margin-top: 0.75rem; font-size: 0.8rem; color: rgba(249,248,245,0.4); display: flex; align-items: center; gap: 0.4rem; transition: all 0.2s; }
+    .fagkort-sub { font-size: 1rem; color: rgba(249,248,245,0.75); }
+    .fagkort-pil { margin-top: 0.75rem; font-size: 0.8rem; color: rgba(249,248,245,0.6); display: flex; align-items: center; gap: 0.4rem; transition: all 0.2s; }
     .fagkort:hover .fagkort-pil { color: rgba(249,248,245,0.8); gap: 0.7rem; }
 
     /* NYHETER */
