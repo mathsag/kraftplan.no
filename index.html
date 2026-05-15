@@ -331,10 +331,10 @@
       header.style.background = "rgba(249,248,245,0.95)";
       header.style.backdropFilter = "blur(12px)";
       header.style.borderBottom = "1px solid rgba(26,31,27,0.08)";
-      header.querySelectorAll("a:not(.nav-cta)").forEach(a => a.style.color = "");
+      header.querySelectorAll("a:not(.nav-cta)").forEach(a => a.style.color = "rgba(26,31,27,0.75)");
       header.querySelector(".hamburger").style.color = "var(--green-900)";
       const cta = header.querySelector(".nav-cta");
-      if (cta) { cta.style.background = "var(--green-900)"; cta.style.border = "none"; }
+      if (cta) { cta.style.background = "var(--green-900)"; cta.style.border = "none"; cta.style.color = "white"; }
     } else {
       header.style.background = "transparent";
       header.style.backdropFilter = "";
@@ -342,7 +342,7 @@
       header.querySelectorAll("a:not(.nav-cta)").forEach(a => a.style.color = "rgba(249,248,245,0.85)");
       header.querySelector(".hamburger").style.color = "var(--off-white)";
       const cta = header.querySelector(".nav-cta");
-      if (cta) { cta.style.background = ""; cta.style.border = ""; }
+      if (cta) { cta.style.background = ""; cta.style.border = ""; cta.style.color = ""; }
     }
   }, { passive: true });
   header.querySelectorAll("a:not(.nav-cta)").forEach(a => a.style.color = "rgba(249,248,245,0.85)");
