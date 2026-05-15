@@ -95,9 +95,9 @@
     .nyhet-nav-btn { width: 2.5rem; height: 2.5rem; border-radius: 50%; border: 1px solid rgba(26,31,27,0.15); background: white; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: all 0.2s; color: var(--text); }
     .nyhet-nav-btn:hover { background: var(--green-900); color: white; border-color: var(--green-900); }
     .nyhet-nav-btn:disabled { opacity: 0.3; cursor: default; }
-    .nyhet-slider-wrap { overflow: hidden; }
+    .nyhet-slider-wrap { overflow: hidden; width: 100%; }
     .nyhet-slider { display: flex; gap: 1.25rem; transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); will-change: transform; }
-    .nyhet-kort { min-width: 100%; background: white; border-radius: 12px; overflow: hidden; color: var(--text); display: flex; flex-direction: column; border: 1px solid rgba(26,31,27,0.07); transition: box-shadow 0.25s; flex-shrink: 0; }
+    .nyhet-kort { min-width: calc((100% - 1.25rem) / 2); box-sizing: border-box; background: white; border-radius: 12px; overflow: hidden; color: var(--text); display: flex; flex-direction: column; border: 1px solid rgba(26,31,27,0.07); transition: box-shadow 0.25s; flex-shrink: 0; }
 
     @media (max-width: 639px) { .nyhet-kort { min-width: calc(100% - 2rem); } }
     .nyhet-kort:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
@@ -128,6 +128,10 @@
     .footer-mobile { display: none; }
     @media (max-width: 767px) {
       footer { overflow-x: hidden; width: 100%; max-width: 100vw; }
+      .nyhet-slider { width: 100%; }
+      .nyhet-kort { min-width: calc(100% - 3rem); }
+      .fagkort-grid { grid-template-columns: 1fr; }
+      .hero-tekst { padding: 7rem 1.5rem 1.5rem; }
       .footer-top { display: none !important; }
       .footer-mobile { display: block; padding: 3rem 1.5rem 2.5rem; width: 100%; max-width: 100%; box-sizing: border-box; }
       .footer-bottom { padding: 1.25rem 1.5rem; color: rgba(249,248,245,0.5); max-width: 100%; box-sizing: border-box; }
@@ -183,7 +187,7 @@
 </div>
 
 <section class="hero">
-  <video autoplay loop muted playsinline>
+  <video autoplay loop muted playsinline playsinline webkit-playsinline>
     <source src="forside.mp4" type="video/mp4" />
   </video>
   <div class="hero-overlay"></div>
@@ -382,8 +386,8 @@
   const nextBtn = document.getElementById("next-btn");
 
   function getVisible() {
-    if (window.innerWidth >= 1024) return 1;
-    if (window.innerWidth >= 640) return 1;
+    if (window.innerWidth >= 1024) return 2;
+    if (window.innerWidth >= 640) return 2;
     return 1;
   }
 
