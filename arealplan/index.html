@@ -3,46 +3,392 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Arealplanlegging — Kraftplan AS</title>
+  <title>Arealplanlegging og analyse — Kraftplan AS</title>
+  <meta name="description" content="Kraftplan bistår private og offentlige aktører med reguleringsplaner, naturfarevurderinger og analysebasert planlegging." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --blue: #4a7c8e;
-      --blue-light: #7aaebb;
-      --blue-dark: #2d5566;
-      --green-900: #192a1d;
-      --green-950: #101c13;
-      --off-white: #f9f8f5;
-      --text: #1a1f1b;
-      --text-muted: rgba(26,31,27,0.6);
+      --green-50: #f4f6f4; --green-100: #e4ebe5; --green-600: #3d5c42;
+      --green-700: #2f4733; --green-900: #192a1d; --green-950: #101c13;
+      --blue: #4a7c8e; --blue-light: #7aaebb;
+      --off-white: #f9f8f5; --off-white-2: #f2f0eb;
+      --text: #1a1f1b; --text-muted: rgba(26,31,27,0.6);
     }
-    html { -webkit-font-smoothing: antialiased; overflow-x: hidden; }
-    body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--off-white); color: var(--text); line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 2rem; }
-    h1 { font-family: 'DM Serif Display', serif; font-weight: 400; }
-
-    .container { max-width: 520px; text-align: center; }
-    .ikon { width: 4rem; height: 4rem; color: var(--blue); margin: 0 auto 2rem; }
-    .label { font-size: 0.7rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.2em; color: var(--blue); margin-bottom: 1rem; }
-    h1 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 1rem; }
-    p { font-size: 1rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 2rem; }
-    .tilbake { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 1.75rem; border-radius: 4px; font-size: 0.875rem; font-weight: 500; text-decoration: none; background: var(--green-950); color: var(--off-white); transition: background 0.2s; }
-    .tilbake:hover { background: var(--green-900); }
-    .stripe { width: 3rem; height: 3px; background: var(--blue); margin: 0 auto 2rem; border-radius: 2px; }
+    html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; overflow-x: hidden; }
+    body { font-family: "DM Sans", system-ui, sans-serif; background: var(--off-white); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+    h1, h2, h3 { font-family: "DM Serif Display", serif; font-weight: 400; line-height: 1.1; }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+    @media (min-width: 768px) { .wrap { padding: 0 3rem; } }
+    #header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; transition: all 0.4s; }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; height: 4.5rem; }
+    .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+    .nav-links a { font-size: 0.875rem; color: rgba(249,248,245,0.85); text-decoration: none; transition: color 0.3s; }
+    .nav-cta { background: rgba(249,248,245,0.15) !important; color: var(--off-white) !important; padding: 0.5rem 1.25rem !important; border-radius: 4px; border: 1px solid rgba(249,248,245,0.25) !important; }
+    .hamburger { display: none; background: none; border: none; cursor: pointer; color: var(--off-white); }
+    @media (max-width: 767px) { .nav-links { display: none; } .hamburger { display: block; } }
+    #mobile-menu { position: fixed; inset: 0; z-index: 200; background: var(--green-950); display: flex; flex-direction: column; padding: 0 1.5rem 2rem; opacity: 0; pointer-events: none; transition: opacity 0.35s; }
+    #mobile-menu.open { opacity: 1; pointer-events: auto; }
+    .mobile-top { display: flex; align-items: center; justify-content: space-between; height: 4.5rem; }
+    .mobile-close { background: none; border: none; cursor: pointer; color: var(--off-white); }
+    .mobile-nav { margin-top: 2.5rem; display: flex; flex-direction: column; }
+    .mobile-nav a { font-family: "DM Serif Display", serif; font-size: 2.5rem; color: var(--off-white); text-decoration: none; padding: 0.6rem 0; border-bottom: 1px solid rgba(249,248,245,0.07); }
+    .mobile-footer-nav { margin-top: auto; padding-top: 2rem; border-top: 1px solid rgba(249,248,245,0.1); font-size: 0.875rem; color: rgba(249,248,245,0.5); display: flex; flex-direction: column; gap: 0.3rem; }
+    .mobile-footer-nav a { color: inherit; text-decoration: none; }
+    .hero { position: relative; height: 100svh; min-height: 640px; overflow: hidden; }
+    .hero-placeholder { position: absolute; inset: 0; background: linear-gradient(135deg, #101c13 0%, #192a1d 40%, #1a2e22 70%, #0f1e15 100%); }
+    .hero-pattern { position: absolute; inset: 0; opacity: 0.05; background-image: repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(249,248,245,0.5) 40px, rgba(249,248,245,0.5) 41px), repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(249,248,245,0.5) 40px, rgba(249,248,245,0.5) 41px); }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(16,28,19,0.3) 0%, rgba(16,28,19,0.1) 40%, rgba(16,28,19,0.9) 100%); }
+    .hero-content { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; }
+    .hero-tekst { padding: 0 0 3.5rem; }
+    .hero-label { font-size: 0.7rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.2em; color: rgba(249,248,245,0.5); margin-bottom: 1rem; }
+    .hero-h1 { font-size: clamp(2.5rem, 4vw, 4rem); color: var(--off-white); max-width: 16ch; }
+    .hero-sub { font-size: 1.0625rem; color: rgba(249,248,245,0.65); margin-top: 1.25rem; max-width: 42rem; line-height: 1.75; }
+    .hero-back { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; color: rgba(249,248,245,0.5); text-decoration: none; transition: color 0.2s; margin-bottom: 2rem; }
+    .hero-back:hover { color: var(--off-white); }
+    .section { padding: 5rem 0; }
+    @media (min-width: 768px) { .section { padding: 7rem 0; } }
+    .section-alt { background: var(--off-white-2); }
+    .section-dark { background: var(--green-900); color: var(--off-white); }
+    .grid-2 { display: grid; gap: 3rem; }
+    @media (min-width: 768px) { .grid-2 { grid-template-columns: 3fr 5fr; gap: 5rem; align-items: start; } }
+    .label { font-size: 0.7rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.2em; color: var(--green-600); }
+    .label-light { color: rgba(249,248,245,0.5); }
+    .body-lg { font-size: 1.0625rem; line-height: 1.75; color: var(--text-muted); }
+    .body-lg + .body-lg { margin-top: 1rem; }
+    .tjenester-grid { display: grid; gap: 1.5rem; margin-top: 3rem; }
+    @media (min-width: 640px) { .tjenester-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .tjenester-grid { grid-template-columns: repeat(4, 1fr); } }
+    .tjeneste-kort { background: white; border-radius: 10px; padding: 2rem; border: 1px solid rgba(26,31,27,0.07); border-top: 3px solid var(--green-600); transition: all 0.25s; }
+    .tjeneste-kort:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,0.08); }
+    .tjeneste-kort-ikon { width: 2.5rem; height: 2.5rem; color: var(--green-600); margin-bottom: 1.25rem; }
+    .tjeneste-kort h3 { font-family: "DM Serif Display", serif; font-size: 1.25rem; margin-bottom: 1rem; }
+    .tjeneste-liste { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+    .tjeneste-liste li { font-size: 0.875rem; color: var(--text-muted); display: flex; align-items: baseline; gap: 0.5rem; }
+    .tjeneste-liste li::before { content: "—"; color: var(--green-600); font-size: 0.75rem; flex-shrink: 0; }
+    .metodikk-grid { display: grid; gap: 1rem; margin-top: 2.5rem; }
+    @media (min-width: 640px) { .metodikk-grid { grid-template-columns: repeat(3, 1fr); } }
+    .metodikk-kort { padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(249,248,245,0.1); background: rgba(249,248,245,0.05); }
+    .metodikk-kort h3 { font-size: 1rem; font-family: "DM Serif Display", serif; color: var(--off-white); margin-bottom: 0.5rem; }
+    .metodikk-kort p { font-size: 0.875rem; color: rgba(249,248,245,0.6); line-height: 1.6; }
+    .team-grid { display: grid; gap: 2rem; margin-top: 3rem; }
+    @media (min-width: 640px) { .team-grid { grid-template-columns: repeat(2, 1fr); } }
+    .team-kort { display: flex; gap: 1.5rem; align-items: flex-start; padding: 2rem; background: white; border-radius: 10px; border: 1px solid rgba(26,31,27,0.07); }
+    .team-avatar { width: 4rem; height: 4rem; border-radius: 50%; background: var(--green-100); display: flex; align-items: center; justify-content: center; font-family: "DM Serif Display", serif; font-size: 1.25rem; color: var(--green-700); flex-shrink: 0; }
+    .team-navn { font-family: "DM Serif Display", serif; font-size: 1.25rem; }
+    .team-tittel { font-size: 0.75rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.15em; color: var(--green-600); margin-top: 0.25rem; }
+    .team-bio { font-size: 0.875rem; color: var(--text-muted); margin-top: 0.75rem; line-height: 1.7; }
+    .kontakt-grid { display: grid; gap: 3rem; }
+    @media (min-width: 768px) { .kontakt-grid { grid-template-columns: 1fr 1fr; align-items: start; } }
+    .kontakt-info { display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem; }
+    .kontakt-rad { display: flex; align-items: center; gap: 0.75rem; font-size: 0.9375rem; }
+    .kontakt-rad a { color: var(--text); text-decoration: none; }
+    .kontakt-rad a:hover { color: var(--green-700); }
+    .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 1.75rem; border-radius: 4px; font-size: 0.875rem; font-weight: 500; text-decoration: none; transition: all 0.25s; font-family: inherit; justify-content: center; }
+    .btn-dark { background: var(--green-900); color: var(--off-white); }
+    .btn-dark:hover { background: var(--green-700); }
+    footer { background: var(--green-950); color: var(--off-white); }
+    .footer-top { display: grid; gap: 3rem; padding: 4rem 0 3rem; }
+    @media (min-width: 768px) { .footer-top { grid-template-columns: 4fr 7fr; } }
+    .footer-cols { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+    @media (min-width: 640px) { .footer-cols { grid-template-columns: repeat(3, 1fr); } }
+    .footer-col-heading { font-size: 0.65rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.2em; color: rgba(249,248,245,0.35); }
+    .footer-col ul { list-style: none; margin-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
+    .footer-col a { font-size: 0.875rem; color: rgba(249,248,245,0.6); text-decoration: none; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--off-white); }
+    .footer-bottom { border-top: 1px solid rgba(249,248,245,0.07); padding: 1.25rem 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(249,248,245,0.4); }
+    .footer-mobile { display: none; }
+    @media (max-width: 767px) {
+      footer { overflow-x: hidden; width: 100%; max-width: 100vw; }
+      .footer-top { display: none !important; }
+      .footer-mobile { display: block; padding: 3rem 1.5rem 2.5rem; width: 100%; max-width: 100%; box-sizing: border-box; }
+      .footer-bottom { padding: 1.25rem 1.5rem; color: rgba(249,248,245,0.5); max-width: 100%; box-sizing: border-box; }
+      .footer-desktop-tagline { display: none; }
+    }
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
   </style>
 </head>
 <body>
-  <div class="container">
-    <svg class="ikon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-      <path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    <p class="label">Kraftplan AS</p>
-    <div class="stripe"></div>
-    <h1>Arealplanlegging</h1>
-    <p>Denne delen av nettsiden er under utvikling. Her vil du snart finne informasjon om våre tjenester innen reguleringsplaner, ROS og naturfare, konsekvensutredning og GIS-analyse.</p>
-    <a href="../index.html" class="tilbake">← Tilbake til forsiden</a>
+
+<header id="header" style="background:transparent;">
+  <div class="wrap header-inner">
+    <a href="../index.html"><img src="../bilder/logo.png" alt="Kraftplan" style="height:44px;width:auto;display:block;" /></a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="../index.html">Forsiden</a></li>
+        <li><a href="../om-oss.html">Om oss</a></li>
+        <li><a href="mailto:kasper.sagen@kraftplan.no" class="nav-cta">Kontakt</a></li>
+      </ul>
+    </nav>
+    <button class="hamburger" onclick="openMenu()" aria-label="Åpne meny">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 17h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
   </div>
+</header>
+
+<div id="mobile-menu">
+  <div class="mobile-top">
+    <img src="../bilder/logo.png" alt="Kraftplan" style="height:40px;width:auto;display:block;" />
+    <button class="mobile-close" onclick="closeMenu()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav">
+    <a href="../index.html" onclick="closeMenu()">Forsiden</a>
+    <a href="../om-oss.html" onclick="closeMenu()">Om oss</a>
+    <a href="mailto:kasper.sagen@kraftplan.no" onclick="closeMenu()">Kontakt</a>
+  </nav>
+  <div class="mobile-footer-nav">
+    <a href="tel:+4748193444">+47 481 93 444</a>
+    <a href="mailto:kasper.sagen@kraftplan.no">kasper.sagen@kraftplan.no</a>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="hero-placeholder"></div>
+  <div class="hero-pattern"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="wrap hero-tekst">
+      <a href="../index.html" class="hero-back">← Tilbake til forsiden</a>
+      <p class="hero-label">Kraftplan AS — Arealplan</p>
+      <h1 class="hero-h1">Arealplanlegging og analyse.</h1>
+      <p class="hero-sub">Kraftplan bistår private og offentlige aktører med reguleringsplaner, naturfarevurderinger og analysebasert planlegging.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap grid-2">
+    <div class="reveal">
+      <p class="label">Om fagområdet</p>
+      <h2 style="font-size:clamp(1.5rem,3vw,2.25rem);margin-top:1rem">Planfaglig kompetanse møter teknisk analyse.</h2>
+    </div>
+    <div class="reveal" style="transition-delay:0.1s">
+      <p class="body-lg">Kraftplan arbeider med reguleringsplaner, naturfare og analysebasert arealplanlegging for private og offentlige aktører.</p>
+      <p class="body-lg">Vi kombinerer planfaglig kompetanse med strukturert analyse og moderne arbeidsprosesser for å utvikle effektive og gjennomførbare planunderlag.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="wrap">
+    <p class="label reveal">Tjenesteområder</p>
+    <h2 style="font-size:clamp(1.5rem,3vw,2.25rem);margin-top:1rem" class="reveal">Hva vi leverer.</h2>
+    <div class="tjenester-grid">
+      <div class="tjeneste-kort reveal">
+        <svg class="tjeneste-kort-ikon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>Reguleringsplan</h3>
+        <ul class="tjeneste-liste">
+          <li>Detaljregulering</li>
+          <li>Områderegulering</li>
+          <li>Planbeskrivelse</li>
+          <li>Reguleringsbestemmelser</li>
+          <li>Innsending og planprosess</li>
+        </ul>
+      </div>
+      <div class="tjeneste-kort reveal" style="transition-delay:0.08s">
+        <svg class="tjeneste-kort-ikon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>ROS og naturfare</h3>
+        <ul class="tjeneste-liste">
+          <li>ROS-analyser</li>
+          <li>Flomfarevurderinger</li>
+          <li>Overvannsvurderinger</li>
+          <li>Naturfarevurderinger</li>
+          <li>Terreng- og avrenningsanalyse</li>
+          <li>Klimatilpasning i plan</li>
+        </ul>
+      </div>
+      <div class="tjeneste-kort reveal" style="transition-delay:0.16s">
+        <svg class="tjeneste-kort-ikon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7v10c0 2 1 3 3 3h10c2 0 3-1 3-3V7c0-2-1-3-3-3H7C5 4 4 5 4 7z" stroke-linecap="round"/><path d="M9 11l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>GIS og analyse</h3>
+        <ul class="tjeneste-liste">
+          <li>Terrenganalyse</li>
+          <li>Arealanalyse</li>
+          <li>Konfliktkartlegging</li>
+          <li>Synlighetsanalyse</li>
+          <li>Kartproduksjon</li>
+        </ul>
+      </div>
+      <div class="tjeneste-kort reveal" style="transition-delay:0.24s">
+        <svg class="tjeneste-kort-ikon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>Konsekvensutredning</h3>
+        <ul class="tjeneste-liste">
+          <li>Naturmangfold</li>
+          <li>Landskap</li>
+          <li>Friluftsliv</li>
+          <li>Naturressurser</li>
+          <li>Samlet belastning</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-dark">
+  <div class="wrap">
+    <p class="label label-light reveal">Vår tilnærming</p>
+    <h2 style="font-size:clamp(1.75rem,3.5vw,2.75rem);color:var(--off-white);margin-top:0.75rem" class="reveal">Metodikk og arbeidsprosess.</h2>
+    <p style="font-size:1rem;color:rgba(249,248,245,0.6);margin-top:0.75rem;max-width:42rem" class="reveal">Vår arbeidsmetodikk bygger på kombinasjonen av planfaglig forståelse, teknisk analyse og digitale arbeidsprosesser. Gjennom bruk av GIS, terrengmodeller og datadrevne vurderinger identifiserer vi utfordringer tidlig og utvikler mer presise planunderlag.</p>
+    <div class="metodikk-grid">
+      <div class="metodikk-kort reveal">
+        <h3>GIS og terrenganalyse</h3>
+        <p>Romlig analyse og terrengmodellering som grunnlag for planfaglige vurderinger og konfliktkartlegging.</p>
+      </div>
+      <div class="metodikk-kort reveal" style="transition-delay:0.08s">
+        <h3>Datadrevet planlegging</h3>
+        <p>Strukturert bruk av geodata, høydemodeller og arealdata for å utvikle presise og robuste beslutningsgrunnlag.</p>
+      </div>
+      <div class="metodikk-kort reveal" style="transition-delay:0.16s">
+        <h3>Tverrfaglig samarbeid</h3>
+        <p>Samarbeid med fagmiljøer innen miljøfag, biologi og geoteknikk for helhetlige og robuste planunderlag.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <p class="label reveal">Fagteam</p>
+    <h2 style="font-size:clamp(1.5rem,3vw,2.25rem);margin-top:1rem" class="reveal">Hvem du jobber med.</h2>
+    <div class="team-grid">
+      <div class="team-kort reveal">
+        <div class="team-avatar">KH</div>
+        <div>
+          <p class="team-navn">Kasper Hennig Øien</p>
+          <p class="team-tittel">Fagansvarlig arealplan</p>
+          <p class="team-bio">Kasper har bakgrunn innen arealplanlegging og erfaring fra komplekse plan- og infrastruktursystemer gjennom tidligere arbeid i Jernbanedirektoratet. Han arbeider med reguleringsplaner, planprosesser og analysebaserte arealfaglige vurderinger.</p>
+        </div>
+      </div>
+      <div class="team-kort reveal" style="transition-delay:0.1s">
+        <div class="team-avatar">KS</div>
+        <div>
+          <p class="team-navn">Kasper Sagen</p>
+          <p class="team-tittel">Daglig leder</p>
+          <p class="team-bio">Kasper arbeider med hydrologi, GIS-analyse, småkraft og tekniske vurderinger knyttet til plan- og utbyggingsprosjekter.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="wrap">
+    <div class="kontakt-grid">
+      <div class="reveal">
+        <p class="label">Kontakt oss</p>
+        <h2 style="font-size:clamp(1.5rem,3vw,2.25rem);margin-top:1rem">Har du et prosjekt vi kan hjelpe med?</h2>
+        <p class="body-lg" style="margin-top:1rem">Ta kontakt for en uforpliktende samtale om ditt prosjekt.</p>
+        <div class="kontakt-info">
+          <div class="kontakt-rad">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <a href="mailto:kasper.sagen@kraftplan.no">kasper.sagen@kraftplan.no</a>
+          </div>
+          <div class="kontakt-rad">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <a href="tel:+4748193444">+47 481 93 444</a>
+          </div>
+        </div>
+      </div>
+      <div class="reveal" style="transition-delay:0.1s">
+        <div style="background:white;border-radius:12px;padding:2rem;border:1px solid rgba(26,31,27,0.07);">
+          <div style="display:flex;flex-direction:column;gap:1rem;">
+            <div>
+              <label style="font-size:0.8rem;font-weight:500;color:var(--text-muted);display:block;margin-bottom:0.4rem;">Navn</label>
+              <input type="text" placeholder="Ditt navn" style="width:100%;padding:0.75rem 1rem;border:1px solid rgba(26,31,27,0.15);border-radius:6px;font-family:inherit;font-size:0.9375rem;outline:none;" />
+            </div>
+            <div>
+              <label style="font-size:0.8rem;font-weight:500;color:var(--text-muted);display:block;margin-bottom:0.4rem;">E-post</label>
+              <input type="email" placeholder="din@epost.no" style="width:100%;padding:0.75rem 1rem;border:1px solid rgba(26,31,27,0.15);border-radius:6px;font-family:inherit;font-size:0.9375rem;outline:none;" />
+            </div>
+            <div>
+              <label style="font-size:0.8rem;font-weight:500;color:var(--text-muted);display:block;margin-bottom:0.4rem;">Melding</label>
+              <textarea placeholder="Beskriv prosjektet ditt..." rows="4" style="width:100%;padding:0.75rem 1rem;border:1px solid rgba(26,31,27,0.15);border-radius:6px;font-family:inherit;font-size:0.9375rem;outline:none;resize:vertical;"></textarea>
+            </div>
+            <a href="mailto:kasper.sagen@kraftplan.no" class="btn btn-dark">Send melding</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-top">
+    <div>
+      <img src="../bilder/logo.png" alt="Kraftplan" style="height:64px;width:auto;display:block;margin-bottom:1rem;" />
+      <p style="font-size:0.875rem;color:rgba(249,248,245,0.45);margin-top:1.5rem">Spesialister på kraft- og arealplanlegging</p>
+      <a href="mailto:kasper.sagen@kraftplan.no" style="display:inline-flex;align-items:center;gap:0.4rem;margin-top:1.5rem;font-size:0.875rem;font-weight:500;color:rgba(249,248,245,0.7);text-decoration:none;">Ta kontakt →</a>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <p class="footer-col-heading">Fagområder</p>
+        <ul>
+          <li><a href="../kraft/index.html">Småkraftutvikling</a></li>
+          <li><a href="index.html">Arealplanlegging</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-heading">Tjenester</p>
+        <ul>
+          <li><a href="#">Reguleringsplan</a></li>
+          <li><a href="#">ROS og naturfare</a></li>
+          <li><a href="#">GIS og analyse</a></li>
+          <li><a href="#">Konsekvensutredning</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-heading">Kontakt</p>
+        <ul>
+          <li><a href="tel:+4748193444">+47 481 93 444</a></li>
+          <li><a href="mailto:kasper.sagen@kraftplan.no">kasper.sagen@kraftplan.no</a></li>
+          <li><span style="color:rgba(249,248,245,0.6);">Org.nr 933 873 870</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="wrap footer-mobile">
+    <img src="../bilder/logo.png" alt="Kraftplan" style="height:48px;width:auto;display:block;" />
+    <div style="margin-top:1.5rem;display:flex;flex-direction:column;gap:0.5rem;">
+      <a href="tel:+4748193444" style="font-size:0.875rem;color:rgba(249,248,245,0.7);text-decoration:none;">+47 481 93 444</a>
+      <a href="mailto:kasper.sagen@kraftplan.no" style="font-size:0.875rem;color:rgba(249,248,245,0.7);text-decoration:none;">kasper.sagen@kraftplan.no</a>
+      <span style="font-size:0.875rem;color:rgba(249,248,245,0.4);">Org.nr 933 873 870</span>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>© 2026 Kraftplan AS</span>
+    <span class="footer-desktop-tagline">Effektiv planlegging, bærekraftig kraft</span>
+  </div>
+</footer>
+
+<script>
+  const header = document.getElementById("header");
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > window.innerHeight * 0.7) {
+      header.style.background = "rgba(249,248,245,0.95)";
+      header.style.backdropFilter = "blur(12px)";
+      header.style.borderBottom = "1px solid rgba(26,31,27,0.08)";
+      header.querySelectorAll("a:not(.nav-cta)").forEach(a => a.style.color = "rgba(26,31,27,0.75)");
+      header.querySelector(".hamburger").style.color = "var(--green-900)";
+    } else {
+      header.style.background = "transparent";
+      header.style.backdropFilter = "";
+      header.style.borderBottom = "none";
+      header.querySelectorAll("a:not(.nav-cta)").forEach(a => a.style.color = "rgba(249,248,245,0.85)");
+      header.querySelector(".hamburger").style.color = "var(--off-white)";
+    }
+  }, { passive: true });
+  header.querySelectorAll("a:not(.nav-cta)").forEach(a => a.style.color = "rgba(249,248,245,0.85)");
+  header.querySelector(".hamburger").style.color = "var(--off-white)";
+  function openMenu() { document.getElementById("mobile-menu").classList.add("open"); document.body.style.overflow = "hidden"; }
+  function closeMenu() { document.getElementById("mobile-menu").classList.remove("open"); document.body.style.overflow = ""; }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visible"); io.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+</script>
 </body>
 </html>
